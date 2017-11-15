@@ -1,0 +1,21 @@
+{
+  "name": "csgo-images",
+  "version": "0.0.1",
+  "description": "",
+  "main": "server.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "async": "^2.5.0",
+    "mongoose": "^4.11.7",
+    "nats": "^0.7.20",
+    "restify": "^5.2.0"
+  }
+}

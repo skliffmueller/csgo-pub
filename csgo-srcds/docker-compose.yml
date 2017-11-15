@@ -1,0 +1,32 @@
+version: '2'
+services:
+  csgo-srcds:
+    environment:
+      NODE_ENV: development-local
+      CSGO_SERVER_ID: 1234567
+      CSGO_IMAGE_PATH: /var/images/599d119bb31dd80001c79df9.qcow2
+      CSGO_START_EXEC: /var/app/csgo/srcds_run
+      CSGO_START_ARGV: -game csgo -console -usercon +game_type 0 +game_mode 1 +map de_dust2 +ip 127.0.0.1
+      REDIS_HOST: redis-csgonet
+      REDIS_PORT: 6379
+    build: .
+    working_dir: /var/app
+    command: node server.js
+    ports:
+     - "27015:27015"
+     - "27015:27015/udp"
+     - "27020:27020/udp"
+     - "26920:26900/udp"
+    volumes:
+     - ../images:/var/images
+    networks:
+      - default
+      - csgonet
+    privileged: true
+    cap_add:
+      - ALL
+    security_opt:
+      - seccomp:unconfined
+networks:
+  csgonet:
+    external: true

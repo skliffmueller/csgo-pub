@@ -1,0 +1,39 @@
+<div>
+    <label>Image</label>
+    <input type="text" [(ngModel)]="body.Image" class="" placeholder="Image" />
+</div>
+<div>
+    <label>Name</label>
+    <input type="text" [(ngModel)]="body.name" class="" placeholder="Name" />
+</div>
+<div>
+    <label>CMD</label>
+    <input type="text" [(ngModel)]="body.Cmd" class="" placeholder="CMD" />
+</div>
+<div>
+    <label>ENV</label>
+    <env [(ngModel)]="body.Env"></env>
+</div>
+<div>
+    <label>Volumes</label>
+    <multi [(ngModel)]="body.HostConfig.Binds"></multi>
+</div>
+<div>
+    <label>Ports</label>
+    <ports [(ngModel)]="body.HostConfig.PortBindings"></ports>
+</div>
+<div>
+    <label>
+        <input type="checkbox" [(ngModel)]="body.HostConfig.Privileged"/>
+        Privileged
+    </label>
+    
+</div>
+<div>
+    <label>Cap Add</label>
+    <multi [(ngModel)]="body.HostConfig.CapAdd"></multi>
+</div>
+<div>
+    <label>Security Opt</label>
+    <multi [(ngModel)]="body.HostConfig.SecurityOpt"></multi>
+</div>

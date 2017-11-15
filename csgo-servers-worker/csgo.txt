@@ -1,0 +1,10 @@
+// update_csgo_ds.txt
+//
+@ShutdownOnFailedCommand 0 //set to 0 if updating multiple servers at once
+@NoPromptForPassword 1
+//login tackygerman rednexr0cks
+//for servers which don't need a login
+login anonymous 
+force_install_dir /var/app/csgo
+app_update 740 validate
+quit

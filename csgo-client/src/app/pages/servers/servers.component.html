@@ -1,0 +1,196 @@
+<div class="filter-menu">
+    <div class="tag-select">
+        <label>Status</label>
+        <span class="tag">running</span>
+        <span class="tag active">error</span>   
+        <span class="tag">stopped</span>   
+    </div>
+    <div class="tag-select">
+        <label>Tags</label>
+        <span class="tag">csgo</span>
+        <span class="tag active">srcds</span>   
+        <span class="tag">deployment</span>   
+        <span class="tag">stuff</span>   
+        <span class="tag">images</span> 
+    </div>
+    <div class="sort">
+        <select>
+            <option>Name</option>
+            <option>Created</option>
+            <option>Host</option>
+            <option>Started At</option>
+        </select>
+        <button type="button">^</button>
+    </div>
+    <div class="buttons">
+        <button type="button">Reset</button>
+        <button type="button">Apply</button>
+    </div>
+</div>
+
+<div class="content">
+    <div class="server-tile">
+        <div class="name">
+            <div>Some_Service_Name_csgo</div>
+            <small>Some_Image_Name_csgo</small>
+        </div>
+        <div class="status running">
+            <span>running</span>
+        </div>
+
+        <div class="host">
+            <span>csgopub.rasterized.net</span>
+        </div>
+        <div class="date">
+            <small>Started At</small>
+            <div>Mar 13 2:00pm</div>
+        </div>
+
+        <div class="volumes">
+            <div><small>Volume Image</small></div>
+            <span>Some Image Name Again</span>
+            <small>0.0.1 Recent</small>
+        </div>
+        <div class="tags">
+            <div class="tag">csgo</div>
+            <div class="tag">srcds</div>   
+            <div class="tag">deployment</div>   
+            <div class="tag">stuff</div>   
+            <div class="tag">images</div>        
+        </div>
+
+        <div class="ports">
+            <div class="port">1234</div>
+            <div class="port">12345</div>
+            <div class="port">1234</div>
+            <div class="port">12345</div>
+            <div class="port">1234</div>
+            <div class="port">12345</div>
+            <div class="port">1234</div>
+            <div class="port">12345</div>
+            <div class="port">1234</div>
+            <div class="port">12345</div>
+        </div>
+    </div>
+    <div class="server-tile">
+            <div class="name">
+                <div>Some_Service_Name_csgo</div>
+                <small>Some_Image_Name_csgo</small>
+            </div>
+            <div class="status running">
+                <span>running</span>
+            </div>
+    
+            <div class="host">
+                <span>csgopub.rasterized.net</span>
+            </div>
+            <div class="date">
+                <small>Started At</small>
+                <div>Mar 13 2:00pm</div>
+            </div>
+    
+            <div class="volumes">
+                <div><small>Volume Image</small></div>
+                <span>Some Image Name Again</span>
+                <small>0.0.1 Recent</small>
+            </div>
+            <div class="tags">
+                <div class="tag">csgo</div>
+                <div class="tag">srcds</div>   
+                <div class="tag">deployment</div>   
+                <div class="tag">stuff</div>   
+                <div class="tag">images</div>        
+            </div>
+    
+            <div class="ports">
+                <div class="port">1234</div>
+                <div class="port">12345</div>
+                <div class="port">1234</div>
+                <div class="port">12345</div>
+                <div class="port">1234</div>
+                <div class="port">12345</div>
+                <div class="port">1234</div>
+                <div class="port">12345</div>
+                <div class="port">1234</div>
+                <div class="port">12345</div>
+            </div>
+        </div>
+        <div class="server-tile">
+                <div class="name">
+                    <div>Some_Service_Name_csgo</div>
+                    <small>Some_Image_Name_csgo</small>
+                </div>
+                <div class="status running">
+                    <span>running</span>
+                </div>
+        
+                <div class="host">
+                    <span>csgopub.rasterized.net</span>
+                </div>
+                <div class="date">
+                    <small>Started At</small>
+                    <div>Mar 13 2:00pm</div>
+                </div>
+        
+                <div class="volumes">
+                    <div><small>Volume Image</small></div>
+                    <span>Some Image Name Again</span>
+                    <small>0.0.1 Recent</small>
+                </div>
+                <div class="tags">
+                    <div class="tag">csgo</div>
+                    <div class="tag">srcds</div>   
+                    <div class="tag">deployment</div>   
+                    <div class="tag">stuff</div>   
+                    <div class="tag">images</div>        
+                </div>
+        
+                <div class="ports">
+                    <div class="port">1234</div>
+                    <div class="port">12345</div>
+                    <div class="port">1234</div>
+                    <div class="port">12345</div>
+                    <div class="port">1234</div>
+                    <div class="port">12345</div>
+                    <div class="port">1234</div>
+                    <div class="port">12345</div>
+                    <div class="port">1234</div>
+                    <div class="port">12345</div>
+                </div>
+            </div>
+</div>
+
+<router-outlet></router-outlet>
+
+<div class="nav remote-nav">
+    <a [routerLink]=" ['./new'] "
+        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+        <div class="icon"></div>
+        <div class="label">New</div>
+    </a>
+    <a [routerLink]=" ['./edit'] "
+        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+        <div class="icon"></div>
+        <div class="label">Edit</div>
+    </a>
+    <a [routerLink]=" ['./images'] "
+        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+        <div class="icon"></div>
+        <div class="label">Start</div>
+    </a>
+    <a [routerLink]=" ['./servers'] "
+        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+        <div class="icon"></div>
+        <div class="label">Stop</div>
+    </a>
+    <a [routerLink]=" ['./autoscripts'] "
+        routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+        <div class="icon"></div>
+        <div class="label">Restart</div>
+    </a>
+    <a [routerLink]=" ['./autoscripts'] "
+    routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+        <div class="icon"></div>
+        <div class="label">Redeploy</div>
+    </a>
+</div>

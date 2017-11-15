@@ -1,0 +1,1 @@
+/usr/sbin/pure-ftpd -A -P localhost -l puredb:/etc/pure-ftpd/pureftpd.pdb

@@ -1,0 +1,81 @@
+<div class="container">
+    <div class="topnav">
+        <div class="head-logo">
+        </div>
+        <div class="notifications" [class.active]="notify" (click)="notify=!notify">
+            <div class="item info">
+                <div class="message">Server creation in progress<small>3:25pm</small></div>
+            </div>
+            <div class="item success">
+                <div class="message">Server creation succeeded<small>3:20pm</small></div>
+                <div class="message">Server creation in progress<small>3:20pm</small></div>
+            </div>
+            <div class="item danger">
+                <div class="message">Server creation failed<small>3:00pm</small></div>
+                <div class="message">Server creation in progress<small>3:00pm</small></div>
+            </div>
+            <div class="date">
+                <div class="line"></div>
+                <div class="label">Yesterday</div>
+                <div class="line"></div>
+            </div>
+            <div class="item info">
+                    <div class="message">Server creation in progress<small>3:25pm</small></div>
+                </div>
+                <div class="item success">
+                    <div class="message">Server creation succeeded<small>3:20pm</small></div>
+                    <div class="message">Server creation in progress<small>3:20pm</small></div>
+                </div>
+                <div class="item danger">
+                    <div class="message">Server creation failed<small>3:00pm</small></div>
+                    <div class="message">Server creation in progress<small>3:00pm</small></div>
+                </div>
+        </div>
+        <div class="settings">
+            <a href="#" (click)="drop=!drop">
+                <div class="icon"></div>
+            </a>
+            <div class="drop" [class.active]="drop">
+                <a href="#">SETTINGS</a>
+
+                <a href="#">SIGN OUT</a>
+            </div>
+        </div>
+    </div>
+
+    <nav class="nav">
+        <a [routerLink]=" ['./'] " [routerLinkActiveOptions]= "{exact: true}"
+            routerLinkActive="active">
+            <div class="icon"></div>
+            <div class="label">Monitor</div>
+        </a>
+        <a [routerLink]=" ['./daemons'] "
+            routerLinkActive="active">
+            <div class="icon"></div>
+            <div class="label">Daemons</div>
+        </a>
+        <a [routerLink]=" ['./images'] "
+            routerLinkActive="active">
+            <div class="icon"></div>
+            <div class="label">Images</div>
+        </a>
+        <a [routerLink]=" ['./servers'] "
+            routerLinkActive="active">
+            <div class="icon"></div>
+            <div class="label">Servers</div>
+        </a>
+        <a [routerLink]=" ['./autoscripts'] "
+            routerLinkActive="active">
+            <div class="icon"></div>
+            <div class="label">Scripts</div>
+        </a>
+    </nav>
+
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+
+    <footer>
+        <div class="copyright">Rasterized Networks LLC</div>
+    </footer>
+</div>

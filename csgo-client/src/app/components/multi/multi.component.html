@@ -1,0 +1,7 @@
+<div class="multi-input">
+  <div *ngFor="let v of input; let i = index">
+    <input type="text" [ngModel]="v" (change)="changeInput(i, $event)" />
+    <button type="button" (click)="removeInput(i)">-</button>
+  </div>
+  <button type="button" (click)="addInput()">+</button>
+</div>

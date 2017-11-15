@@ -1,0 +1,44 @@
+<div class="filter-menu">
+
+</div>
+
+<div class="content">
+  <h3>Home</h3>
+</div>
+
+<div class="remote-child">
+    <router-outlet></router-outlet>
+</div>
+
+<div class="nav remote-nav">
+  <a [routerLink]=" ['./'] "
+      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      <div class="icon"></div>
+      <div class="label">New</div>
+  </a>
+  <a [routerLink]=" ['./daemons'] "
+      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      <div class="icon"></div>
+      <div class="label">Edit</div>
+  </a>
+  <a [routerLink]=" ['./images'] "
+      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      <div class="icon"></div>
+      <div class="label">Start</div>
+  </a>
+  <a [routerLink]=" ['./servers'] "
+      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      <div class="icon"></div>
+      <div class="label">Stop</div>
+  </a>
+  <a [routerLink]=" ['./autoscripts'] "
+      routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+      <div class="icon"></div>
+      <div class="label">Restart</div>
+  </a>
+  <a [routerLink]=" ['./autoscripts'] "
+  routerLinkActive="active" [routerLinkActiveOptions]= "{exact: true}">
+    <div class="icon"></div>
+    <div class="label">Redeploy</div>
+  </a>
+</div>

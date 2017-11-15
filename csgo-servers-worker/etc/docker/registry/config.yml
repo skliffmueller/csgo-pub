@@ -1,0 +1,28 @@
+version: 0.1
+log:
+  fields:
+    service: registry
+storage:
+  cache:
+    blobdescriptor: inmemory
+  filesystem:
+    rootdirectory: /var/lib/registry
+http:
+  addr: csgopub.rasterized.net:5000
+  host: https://csgopub.rasterized.net:5000
+  secret: 7aslkdj8ASDs8sS8d8340fDS1225
+  relativeurls: false
+  tls:
+    certificate: /etc/docker/registry/server-cert.pem
+    key: /etc/docker/registry/server-key.pem
+    clientcas:
+      - /etc/docker/registry/ca.pem
+  debug:
+    addr: localhost:5001
+  headers:
+    X-Content-Type-Options: [nosniff]
+health:
+  storagedriver:
+    enabled: true
+    interval: 10s
+    threshold: 3
