@@ -6,24 +6,20 @@ RUN dpkg --add-architecture i386
 
 COPY ./etc/apt/sources.list /etc/apt/sources.list
 
-RUN apt-get -y update && apt-get -yqq install curl lib32gcc1 qemu kmod qemu-utils parted linux-headers-amd64 linux-image-amd64 xz-utils pure-ftpd
+RUN apt-get -y update && apt-get -yqq install curl lib32gcc1 qemu kmod qemu-utils parted linux-headers-amd64 linux-image-amd64 xz-utils
 
 RUN echo debconf steam/question select I AGREE | debconf-set-selections && \
     apt-get install -yqq steamcmd
 
 #RUN curl -s http://media.steampowered.com/installer/steamcmd_linux.tar.gz | tar -vxz
 
-RUN ln -s /lib/modules/3.16.0-4-amd64 /lib/modules/`uname -r`
+RUN mkdir /lib/modules/`uname -r`
+RUN cp -rf /lib/modules/3.16.0-4-amd64 /lib/modules/`uname -r`
 
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
-RUN groupadd ftpgroup
-RUN useradd -g ftpgroup -d /dev/null -s /etc ftpuser
 
-COPY ./etc/pure-ftpd/pureftpd.pdb /etc/pure-ftpd/pureftpd.pdb
-
-RUN echo "40110 40210" > /etc/pure-ftpd/conf/PassivePortRange
 
 #RUN echo `DOCKER IP` > /etc/pure-ftpd/conf/ForcePassiveIP
 
