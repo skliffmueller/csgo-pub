@@ -7,6 +7,8 @@ services:
       MONGDB_DEBUG: "true"
       MONGODB_CONNECTION_STRING: "mongodb://mongodb-csgonet:27017/service-servers"
       NATS_CONNECTION_URI: "nats://nats-csgonet:4222"
+      REDIS_HOST: redis-csgonet
+      REDIS_PORT: 6379
     build: .
     working_dir: /var/app
     command: node server.js

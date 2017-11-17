@@ -10,7 +10,6 @@ services:
     working_dir: /var/app
     command: node server.js
     ports:
-     - "21:21"
      - "40110-40210:40110-40210"
      - "27015:27015"
      - "27015:27015/udp"

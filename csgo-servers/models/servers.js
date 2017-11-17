@@ -75,7 +75,7 @@ let s = new Schema(
           version: {
               type:String
           }
-      },
+      }/*,
       registry:{
           host:{
               type:String,
@@ -88,7 +88,7 @@ let s = new Schema(
           ca: String,
           cert: String,
           key: String
-      }
+      }*/
     },
     container:{
       Id:{

@@ -27,10 +27,9 @@ let s = new Schema(
             default:"v1.29"
         }
     },
-    registry:{
+    /*registry:{
         host:{
-            type:String,
-            required:true
+            type:String
         },
         port:{
             type:Number,
@@ -39,7 +38,7 @@ let s = new Schema(
         ca: String,
         cert: String,
         key: String
-    },
+    },*/
     status:{
         type:String,
         enum:['ONLINE', 'VERIFYING', 'OFFLINE'],

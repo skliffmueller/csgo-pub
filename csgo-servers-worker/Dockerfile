@@ -6,24 +6,10 @@ RUN dpkg --add-architecture i386
 
 COPY ./etc/apt/sources.list /etc/apt/sources.list
 
-RUN apt-get -y update && apt-get -yqq install curl lib32gcc1 qemu kmod qemu-utils parted linux-headers-amd64 linux-image-amd64 xz-utils pure-ftpd
+RUN apt-get -y update && apt-get -yqq install curl lib32gcc1 xz-utils
 
-RUN echo debconf steam/question select I AGREE | debconf-set-selections && \
-    apt-get install -yqq steamcmd
 
 #RUN curl -s http://media.steampowered.com/installer/steamcmd_linux.tar.gz | tar -vxz
-
-RUN ln -s /lib/modules/3.16.0-4-amd64 /lib/modules/`uname -r`
-
-RUN groupadd --gid 1000 node \
-  && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
-
-RUN groupadd ftpgroup
-RUN useradd -g ftpgroup -d /dev/null -s /etc ftpuser
-
-COPY ./etc/pure-ftpd/pureftpd.pdb /etc/pure-ftpd/pureftpd.pdb
-
-RUN echo "40110 40210" > /etc/pure-ftpd/conf/PassivePortRange
 
 #RUN echo `DOCKER IP` > /etc/pure-ftpd/conf/ForcePassiveIP
 
@@ -87,34 +73,11 @@ RUN set -ex \
 
 ENV NODE_ENV development-local
 ENV HOME /var/app
-ENV IMAGE_ROOT /var/images
-
-RUN mkdir $IMAGE_ROOT
-RUN mkdir $HOME
-RUN mkdir $HOME/csgo
-
-RUN ln -s /usr/games/steamcmd $HOME/steamcmd
-
-RUN mkdir /mnt/nbd0
-RUN mkdir /mnt/nbd1
-RUN mkdir /mnt/nbd2
-
-RUN chown -R ftpuser:ftpgroup /mnt
 
 WORKDIR $HOME
 
 COPY package.json package.json
 RUN npm i
 COPY . .
-
-VOLUME $IMAGE_ROOT
-
-EXPOSE 40110-40210
-EXPOSE 21
-
-EXPOSE 27015
-EXPOSE 27015/udp
-EXPOSE 27020/udp
-EXPOSE 26900/udp
 
 CMD node server.js

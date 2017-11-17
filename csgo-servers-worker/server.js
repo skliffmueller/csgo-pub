@@ -61,7 +61,7 @@ nats.subscribe('servers::create', { 'queue': 'servers.worker' }, message => {
     })
     .then((server) => {
         queueServer.push([{
-            controller:'server',
+            controller:'servers',
             action:'createContainer',
             data:server
         }], (err) => {

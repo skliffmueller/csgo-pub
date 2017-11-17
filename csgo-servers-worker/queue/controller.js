@@ -29,6 +29,7 @@ controller.createContainer = (data, q, callback) => {
             return container.inspect()
         })
         .then(cInfo => {
+            console.log('cInfo', cInfo)
             if(Array.isArray(cInfo)) {
                 if(cInfo.length) {
                     info = cInfo[0]
@@ -66,6 +67,7 @@ controller.createContainer = (data, q, callback) => {
             callback()
         })
         .catch(err => {
+            console.log(err)
             // socket announce 'notification',
             let notBody = JSON.stringify({
                 id: actionId, // Some generated

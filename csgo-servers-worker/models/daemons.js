@@ -6,7 +6,9 @@ const Schema = mongoose.Schema
 let s = new Schema(
   {
     name:{
-        type:String
+        type:String,
+        required:true,
+        unique:true
     },
     config:{
         host: {
@@ -15,15 +17,33 @@ let s = new Schema(
         },
         port: {
             type:Number,
-            default:2375 // 2376?ssl
+            default:2376 // 2376?ssl
         },
         ca: String,
         cert: String,
         key: String,
         version: {
             type:String,
-            default:"v1.25"
+            default:"v1.29"
         }
+    },
+    /*registry:{
+        host:{
+            type:String,
+            required:true
+        },
+        port:{
+            type:Number,
+            default:5000
+        },
+        ca: String,
+        cert: String,
+        key: String
+    },*/
+    status:{
+        type:String,
+        enum:['ONLINE', 'VERIFYING', 'OFFLINE'],
+        default:'OFFLINE'
     }
   },
   {

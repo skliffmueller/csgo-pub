@@ -5,34 +5,57 @@ const Schema = mongoose.Schema
 
 let s = new Schema(
   {
-    name:{
-      type:String,
-      required:true
-    },
     tags:[String],
-    status:{
-      type:String,
-      enum:['ONLINE','OFFLINE','IDLE','ERROR','STARTING','GENERATING'],
-      default:"OFFLINE"
-    },
-    lastStatus:{
-      code:Number,
-      body:String
-    },
-    srcds:{
-      rconPassword:{
+    deploymentConfig:{
+      name:String,
+      HostName:String,
+      Domainname:String,
+      User:String,
+      AttachStdin:{
+        type:Boolean,
+        default:false
+      },
+      AttachStdout:{
+        type:Boolean,
+        default:false
+      },
+      AttachStderr:{
+        type:Boolean,
+        default:false
+      },
+      ExposePorts:Schema.Types.Mixed,
+      Tty:Boolean,
+      OpenStdin:Boolean,
+      StdinOnce:Boolean,
+      Env:[String], // Something=Another
+      Cmd:{
         type:String,
         required:true
       },
-      ip:{
+      Image:{ // Image name for container csgo-srcds
         type:String,
         required:true
       },
-      port:{
+      Volumes:Schema.Types.Mixed,
+      WorkingDir:{
+        type:String,
+        required:true
+      },
+      EntryPoint:String,
+      NetworkDisabled:Boolean,
+      MacAddress:String,
+      OnBuild:[String],
+      Labels:Schema.Types.Mixed,
+      StopSignal:{
+        type:String,
+        default:"SIGTERM"
+      },
+      StopTimeout:{
         type:Number,
-        required:true
+        default:10
       },
-      startArgv:[String]
+      HostConfig:Schema.Types.Mixed,
+      NetworkingConfig:Schema.Types.Mixed
     },
     daemon:{
       _id:Schema.Types.ObjectId,
@@ -52,13 +75,92 @@ let s = new Schema(
           version: {
               type:String
           }
-      }
+      }/*,
+      registry:{
+          host:{
+              type:String,
+              required:true
+          },
+          port:{
+              type:Number,
+              default:5000
+          },
+          ca: String,
+          cert: String,
+          key: String
+      }*/
     },
     container:{
-      Id:{type:String},
-      Names:[{type:String}],
-      Image:{type:String},
-      ImageId:{type:String},
+      Id:{
+        type:String,
+        default:""
+      },
+      Name:{
+        type:String,
+        default:""
+      },
+      State:{
+          Status: {
+            type:String,
+            enum:["created", "running", "paused", "restarting", "removing", "exited", "dead"],
+            default:"created"
+          },
+          Running: {
+            type:Boolean,
+            default:false
+          },
+          Paused: {
+            type:Boolean,
+            default:false
+          },
+          Restarting: {
+            type:Boolean,
+            default:false
+          },
+          OOMKilled: {
+            type:Boolean,
+            default:false
+          },
+          Dead: {
+            type:Boolean,
+            default:false
+          },
+          Pid: {
+            type:Number,
+            default: 0
+          },
+          ExitCode: {
+            type:Number,
+            default:0
+          },
+          Error: {
+            type:String,
+            default:""
+          },
+          StartedAt: {
+            type:Date,
+            default:new Date(0)
+          },
+          FinishedAt: {
+            type:Date,
+            default:new Date(0)
+          }
+      }
+      /*
+          "State": {
+              "Status": "running",
+              "Running": true,
+              "Paused": false,
+              "Restarting": false,
+              "OOMKilled": false,
+              "Dead": false,
+              "Pid": 18577,
+              "ExitCode": 0,
+              "Error": "",
+              "StartedAt": "2017-08-24T00:06:15.408455743Z",
+              "FinishedAt": "2017-08-24T00:05:23.877797271Z"
+          },
+      */
       // Mounts may have what we need for node linking
       // If not Network settings may have insight
     },
@@ -75,11 +177,13 @@ let s = new Schema(
       },
       type:{
           type:String,
-          enum:['BASE','CONTAINER','MERGE']
+          enum:['BASE','CONTAINER','MERGE'],
+          default:'CONTAINER'
       },
       versionStatus:{
           type:String,
-          enum:['RECENT','OLD','DELETED','TEST']
+          enum:['RECENT','OLD','DELETED','TEST'],
+          default:'RECENT'
       },
       version:{
           // For BASE type
@@ -94,18 +198,12 @@ let s = new Schema(
           // Will also have to scale with location
           type:String
       },
-      status:{ type:String, enum:['MOUNTED','FTP','STEAMCMD','GITHUB','CONTAINER','IDLE']}
-    },  
-    redis:{
-      name:{
+      status:{
         type:String,
-        unique:true
-      },
-      host:String,
-      port:Number,
-      auth:String
-    },
-    rconStatus: Schema.Types.Mixed
+        enum:['MOUNTED','FTP','STEAMCMD','GITHUB','CONTAINER','IDLE'],
+        default:'MOUNTED'
+      }
+    }
   },
   {
     id: false,

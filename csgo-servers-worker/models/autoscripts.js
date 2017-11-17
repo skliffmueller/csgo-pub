@@ -7,24 +7,25 @@ let s = new Schema(
   {
     name:{
       type:String,
-      required:true
+      required:true,
+      unique:true
     },
-    description:{
+    description:{ // a way to describe what the autoscript does
       type:String,
       default:""
     },
-    tags:[String],
+    tags:[String], // ways to identify the auto script and search against the db
     fields:[{
-      key:{
+      key:{ // This is the identifiable key in the script to replace $key is searched in string
         type:String,
         required: true
       },
-      default:{
+      default:{ // This is the default value to replace key with
         type:String,
         required: true
       },
-      options:[String],
-      name:String
+      options:[String], // List of possible options
+      name:String // Human readable name for field
     }],
     exec:[String]
   },

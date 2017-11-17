@@ -1,0 +1,23 @@
+version: '2'
+services:
+  csgo-ftp:
+    environment:
+      IMAGE_PATH: /var/images/5a0b7bf0c11f730001d0872a.qcow2
+    build: .
+    working_dir: /var/app
+    command: /var/app/startftp.sh
+    ports:
+     - "21:21"
+    volumes:
+     - f:/images:/var/images
+    networks:
+      - default
+      - csgonet
+    privileged: true
+    cap_add:
+      - ALL
+    security_opt:
+      - seccomp:unconfined
+networks:
+  csgonet:
+    external: true

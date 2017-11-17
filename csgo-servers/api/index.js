@@ -38,7 +38,7 @@ function mount(server) {
     // Create autoscript
     server.post({ path: '/autoscripts', version: '1.0.0' }, autoscriptController.create)
     // Details about autoscript
-    server.get({ path: '/autoscripts/:id', version: '1.0.0' }, autoscriptnController.show)
+    server.get({ path: '/autoscripts/:id', version: '1.0.0' }, autoscriptController.show)
 
     server.post({ path: '/autoscripts/:id/update', version: '1.0.0' }, autoscriptController.update)
     // Remove autoscript

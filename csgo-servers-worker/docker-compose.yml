@@ -6,16 +6,11 @@ services:
       MONGDB_DEBUG: "true"
       MONGODB_CONNECTION_STRING: "mongodb://mongodb-csgonet:27017/service-servers"
       NATS_CONNECTION_URI: "nats://nats-csgonet:4222"
+      REDIS_HOST: redis-csgonet
+      REDIS_PORT: 6379
     build: .
     working_dir: /var/app
     command: node server.js
-    ports:
-     - "21:21"
-     - "40110-40210:40110-40210"
-     - "27015:27015"
-     - "27015:27015/udp"
-     - "27020:27020/udp"
-     - "26900:26900/udp"
     volumes:
      - f:/images:/var/images
     networks:

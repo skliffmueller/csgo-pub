@@ -220,5 +220,12 @@ function remove(req, res, next) {
 
 module.exports = {
   index,
-  create
+  create,
+  show,
+  details,
+  control,
+  recreate,
+  getRcon,
+  sendRcon,
+  remove
 }
