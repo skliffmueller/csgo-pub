@@ -1,4 +1,5 @@
 deb [arch=amd64,i386] http://deb.debian.org/debian jessie main non-free
+deb [arch=amd64,i386] http://deb.debian.org/debian jessie-backports main non-free
 deb [arch=amd64,i386] http://deb.debian.org/debian jessie-updates main non-free
 deb [arch=amd64,i386] http://security.debian.org jessie/updates main non-free
 deb [arch=amd64,i386] http://deb.debian.org/debian sid main non-free

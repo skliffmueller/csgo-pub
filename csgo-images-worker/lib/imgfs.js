@@ -5,18 +5,34 @@ const exec = util.promisify(require('child_process').exec)
 const spawn = require('child_process').spawn
 
 function createEmptyImage(imagePath, size) {
-    let devPath = "/dev/nbd0"
+    let devPath = _reserveDev() //"/dev/nbd0"
+    if(!devPath) {
+        return Promise.reject()
+    }
     return _qemuCreateImage(imagePath, size)
             .then((stdout, stderr) => _qemuConnectImage(devPath, imagePath))
             .then((stdout, stderr) => _mkfsExt4(devPath))
             .then((stdout, stderr) => _qemuDisconnectImage(devPath))
+            .then((stdout, stderr) => {
+                _removeDev(devPath)
+                return Promise.resolve()
+            })
+            .catch((e) => {
+                _removeDev(devPath)
+            })
 }
 
 function mergeImages(newImagePath, images) {
-    let newImageDev = "/dev/nbd0"
+    let newImageDev = _reserveDev() //"/dev/nbd0"
     let newImageDir = "/mnt/nbd0"
-    let mergeImageDev = "/dev/nbd1"
+    let mergeImageDev = _reserveDev()
     let mergeImageDir = "/mnt/nbd1"
+
+    if(!newImageDev || !mergeImageDev) {
+        _removeDev(newImageDev)
+        _removeDev(mergeImageDev)
+        return Promise.reject()
+    }
 
     return mountImage(newImageDev, newImagePath, newImageDir)
             .then((stdout, stderr) => {
@@ -37,6 +53,8 @@ function mergeImages(newImagePath, images) {
                     }, (err) => {
 
                         unmountImage(newImageDev).then((stdout, stderr) => {
+                            _removeDev(newImageDev)
+                            _removeDev(mergeImageDev)
                             if(err)
                                 reject(err)
                             else
@@ -75,39 +93,6 @@ function copy(fromPath, toPath) {
     return exec(`cp -rf ${fromPath} ${toPath}`)
 }
 
-function startFtpWithImagePath(imagePath) {
-    let devPath = "/dev/nbd0"
-    let dirPath = "/mnt/nbd0"
-    return mountImage(devPath, imagePath, dirPath)
-            .then(() => {
-                return _ftpStart()
-            })
-}
-
-function stopFtpWithImagePath() {
-    return _ftpStop()
-}
-
-let ftpProcess;
-function _ftpStart() {
-    console.log(ftpProcess) // Debug
-    if(ftpProcess) {
-        return Promise.reject("Process already exists");
-    }
-    ftpProcess = spawn('pure-ftpd',
-                        ['-A','-P','localhost'],
-                        {
-                            detached: true
-                        })
-    ftpProcess.on('close', () => {
-        _chownUser("ftpuser:ftpgroup", "/mnt")
-    })
-
-    return Promise.resolve(ftpProcess)
-
-    // pure-ftpd -A -P localhost
-}
-
 
 function runSteamCmd(config, installDir) {
     if(!config) {
@@ -119,29 +104,80 @@ function runSteamCmd(config, installDir) {
     let configPath = "/var/app/exec.txt"
     return writeFile(configPath, config)
         .then((stdout, stderr) => {
-            return exec(`/var/app/steamcmd +runscript ${configPath}`)
-        })
-        .then((stdout, stderr) => {
-            return _chownUser("ftpuser:ftpgroup", installDir)
+            return new Promise((resolve, reject) => {
+                let exec = `/var/app/steamcmd`
+                let args = [
+                    "+runscript",
+                    configPath
+                ]
+                console.log('start', exec, args)
+                app = spawn(
+                    exec,
+                    args
+                )
+                app.on('error', (error) => {
+                    reject()
+                    console.log('child process error', error)
+                })
+                app.stdout.setEncoding('utf8')
+                // app.stdout.on('data', data => sendLog(data))
+                app.stdout.on('data', data => console.log(data))
+                // app.stderr.on('data', data => sendLog(data));
+                app.on('close', (code) => {
+                    console.log(`child process exited with code ${code}`);
+                    resolve()
+                });
+            })
+
         })
 }
 
-function _ftpStop() {
-    if(ftpProcess) {
-        ftpProcess.kill()
+let _availableDev = [
+    '/dev/nbd0',
+    '/dev/nbd1',
+    '/dev/nbd2',
+    '/dev/nbd3',
+    '/dev/nbd4',
+    '/dev/nbd5',
+    '/dev/nbd6',
+    '/dev/nbd7',
+    '/dev/nbd8',
+    '/dev/nbd9',
+    '/dev/nbd10',
+    '/dev/nbd11',
+    '/dev/nbd12',
+    '/dev/nbd13',
+    '/dev/nbd14',
+    '/dev/nbd15',
+    '/dev/nbd16'
+    
+]
+let _usedDev = []
+
+function _reserveDev() {
+    let filteredDev = _availableDev.filter((a) => {
+        return _usedDev.indexOf(a) == -1
+    })
+    if(!filteredDev.length) {
+        return false
     }
-    return Promise.resolve()
-    // pure-ftpd -A -P localhost
+    _usedDev.push(filteredDev[0])
+    return filteredDev[0]
 }
 
-function _ftpUserAdd(user, pass) {
-    // pure-pw useradd joe -u ftpuser -d /mnt
-    return exec(`pure-pw useradd ${user} -u ftpuser -d /mnt`)
+function _removeDev(dev) {
+    if(!dev) {
+        return false
+    }
+    let i = _usedDev.indexOf(dev)
+    if(i==-1) {
+        return false
+    }
+    _usedDev.splice(i, 1)
+    return true
 }
 
-function _ftpUserSave() {
-    return exec(`pure-pw mkdb`)
-}
+
 function _chownUser(user, path) {
     return exec(`chown -R ${user} ${path}`)
 }
@@ -213,7 +249,5 @@ module.exports = {
     unmountImage,
     pullGithub,
     copy,
-    startFtpWithImagePath,
-    stopFtpWithImagePath,
     runSteamCmd
 }

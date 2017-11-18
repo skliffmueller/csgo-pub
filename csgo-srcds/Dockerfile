@@ -13,8 +13,8 @@ RUN echo debconf steam/question select I AGREE | debconf-set-selections && \
 
 #RUN curl -s http://media.steampowered.com/installer/steamcmd_linux.tar.gz | tar -vxz
 
-RUN mkdir /lib/modules/`uname -r`
-RUN cp -rf /lib/modules/3.16.0-4-amd64 /lib/modules/`uname -r`
+RUN mkdir /lib/modules/3.16.0-4-amd64
+RUN cp -rf /lib/modules/`uname -r`/* /lib/modules/3.16.0-4-amd64/
 
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
