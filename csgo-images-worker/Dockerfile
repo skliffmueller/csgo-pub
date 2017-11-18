@@ -1,7 +1,6 @@
 FROM debian:jessie
 MAINTAINER Shannon Kliffmueller <s.kliffmueller at gmail dot com>
 
-
 RUN dpkg --add-architecture i386
 
 COPY ./etc/apt/sources.list /etc/apt/sources.list
@@ -12,9 +11,6 @@ RUN echo debconf steam/question select I AGREE | debconf-set-selections && \
     apt-get install -yqq steamcmd
 
 #RUN curl -s http://media.steampowered.com/installer/steamcmd_linux.tar.gz | tar -vxz
-
-RUN mkdir /lib/modules/`uname -r`
-RUN cp -rf /lib/modules/3.16.0-4-amd64 /lib/modules/`uname -r`
 
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
@@ -79,8 +75,6 @@ RUN set -ex \
   && ln -s /opt/yarn/bin/yarn /usr/local/bin/yarnpkg \
   && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz
 
-
-
 ENV NODE_ENV development-local
 ENV HOME /var/app
 ENV IMAGE_ROOT /var/images
@@ -104,6 +98,7 @@ RUN npm i
 COPY . .
 
 VOLUME $IMAGE_ROOT
+VOLUME /lib/modules
 
 EXPOSE 40110-40210
 
