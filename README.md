@@ -28,4 +28,4 @@ The docker images created to be deployed by the server service consiste of the f
 
  These docker images are designed to accept Redis connection information and send the stdout to the redis server. Rcon is also available on most game server protocols which is intergrated into the server API.
 
-[Server Layout](/CSGO-pub-flowchart.png)
+![Server Layout](/CSGO-pub-flowchart.png)
