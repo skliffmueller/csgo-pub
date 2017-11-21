@@ -6,10 +6,13 @@ Storage space is costly, and server management isn't scaleable by hiring more se
 ## API Documentation
 
 [Images API Documentation](./CSGO-Images-API-Doc.html)
+
 [Servers API Documentation](./CSGO-Servers-API-Doc.html)
 
 These are generated based on the Postman export. More details need to be itterated about what each field means.
 Socket.io has been freehanded, and has not been tested fully or debugged. Documentation will come soon after thorough testing.
+
+[TODO](./TODO.md)
 
 ## High Level Architecture
 
