@@ -1,0 +1,552 @@
+{
+	"variables": [],
+	"info": {
+		"name": "CSGO-Servers",
+		"_postman_id": "50b24a7d-0088-8b2f-cae8-0c0b9697a4d7",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List Servers",
+			"request": {
+				"url": "http://localhost:8003/servers",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "4813b173-dc5a-4e96-9bf4-812b81bcfe99",
+					"name": "Basic Response",
+					"originalRequest": {
+						"url": "http://localhost:8003/servers",
+						"method": "GET",
+						"header": [],
+						"body": {}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip",
+							"name": "Content-Encoding",
+							"description": "The type of encoding used on the data."
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Nov 2017 19:42:01 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Cpub",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 31,
+					"body": "[{\"_id\":\"5a0de9e07df740000197e65c\",\"updatedAt\":\"2017-11-16T19:41:20.380Z\",\"createdAt\":\"2017-11-16T19:41:20.380Z\",\"__v\":0,\"image\":{\"_id\":\"5a0b7bf0c11f730001d0872a\",\"imagePath\":\"/var/images/5a0b7bf0c11f730001d0872a.qcow2\",\"name\":\"CSGO First Test\",\"imageSize\":\"20G\",\"version\":\"0.0.1\",\"uniqueName\":\"csgo-test\",\"containerId\":\"\",\"status\":\"IDLE\",\"versionStatus\":\"TEST\",\"type\":\"BASE\"},\"container\":{\"State\":{\"FinishedAt\":\"1970-01-01T00:00:00.000Z\",\"StartedAt\":\"1970-01-01T00:00:00.000Z\",\"Error\":\"\",\"ExitCode\":0,\"Pid\":0,\"Dead\":false,\"OOMKilled\":false,\"Restarting\":false,\"Paused\":false,\"Running\":false,\"Status\":\"created\"},\"Name\":\"\",\"Id\":\"\"},\"daemon\":{\"_id\":\"5a0de2c567d03000010140be\",\"name\":\"Localhost\",\"config\":{\"host\":\"localhost\",\"ca\":\"\",\"cert\":\"\",\"key\":\"\",\"version\":\"v1.29\",\"port\":2376}},\"deploymentConfig\":{\"name\":\"/csgosrcds_csgo-srcds_1\",\"Cmd\":\"node server.js\",\"Image\":\"csgosrcds_csgo-srcds\",\"WorkingDir\":\"/var/app\",\"HostConfig\":{\"Binds\":[\"/F/images:/var/images:rw\"],\"PortBindings\":{\"26900/udp\":[{\"HostIp\":\"\",\"HostPort\":\"26920\"}],\"27015/tcp\":[{\"HostIp\":\"\",\"HostPort\":\"27015\"}],\"27015/udp\":[{\"HostIp\":\"\",\"HostPort\":\"27015\"}],\"27020/udp\":[{\"HostIp\":\"\",\"HostPort\":\"27020\"}]},\"CapAdd\":[\"ALL\"],\"Privileged\":true,\"SecurityOpt\":[\"seccomp:unconfined\",\"label=disable\"]},\"StopTimeout\":10,\"StopSignal\":\"SIGTERM\",\"OnBuild\":[],\"Env\":[\"REDIS_HOST=redis-csgonet\",\"NODE_ENV=development-local\",\"CSGO_IMAGE_PATH=/var/images/599d119bb31dd80001c79df9.qcow2\",\"CSGO_SERVER_ID=1234567\",\"CSGO_START_ARGV=-game csgo -console -usercon +game_type 0 +game_mode 1 +map de_dust2 +ip 127.0.0.1\",\"CSGO_START_EXEC=/var/app/csgo/srcds_run\",\"REDIS_PORT=6379\"],\"AttachStderr\":false,\"AttachStdout\":false,\"AttachStdin\":false},\"tags\":[\"test\",\"csgo-srcds\"]}]"
+				}
+			]
+		},
+		{
+			"name": "Get Server Details",
+			"request": {
+				"url": "http://localhost:8003/servers/5a0de9e07df740000197e65c",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "abbaa209-95fd-4e78-95aa-53e5b637584f",
+					"name": "Basic Response",
+					"originalRequest": {
+						"url": "http://localhost:8003/servers/5a0de9e07df740000197e65c",
+						"method": "GET",
+						"header": [],
+						"body": {}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip",
+							"name": "Content-Encoding",
+							"description": "The type of encoding used on the data."
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Nov 2017 19:47:45 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Cpub",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 37,
+					"body": "{\"_id\":\"5a0de9e07df740000197e65c\",\"updatedAt\":\"2017-11-16T19:41:20.380Z\",\"createdAt\":\"2017-11-16T19:41:20.380Z\",\"image\":{\"_id\":\"5a0b7bf0c11f730001d0872a\",\"imagePath\":\"/var/images/5a0b7bf0c11f730001d0872a.qcow2\",\"name\":\"CSGO First Test\",\"imageSize\":\"20G\",\"version\":\"0.0.1\",\"uniqueName\":\"csgo-test\",\"containerId\":\"\",\"status\":\"IDLE\",\"versionStatus\":\"TEST\",\"type\":\"BASE\"},\"container\":{\"State\":{\"FinishedAt\":\"1970-01-01T00:00:00.000Z\",\"StartedAt\":\"1970-01-01T00:00:00.000Z\",\"Error\":\"\",\"ExitCode\":0,\"Pid\":0,\"Dead\":false,\"OOMKilled\":false,\"Restarting\":false,\"Paused\":false,\"Running\":false,\"Status\":\"created\"},\"Name\":\"\",\"Id\":\"\"},\"daemon\":{\"_id\":\"5a0de2c567d03000010140be\",\"name\":\"Localhost\",\"config\":{\"host\":\"localhost\",\"ca\":\"\",\"cert\":\"\",\"key\":\"\",\"version\":\"v1.29\",\"port\":2376}},\"deploymentConfig\":{\"name\":\"/csgosrcds_csgo-srcds_1\",\"Cmd\":\"node server.js\",\"Image\":\"csgosrcds_csgo-srcds\",\"WorkingDir\":\"/var/app\",\"HostConfig\":{\"SecurityOpt\":[\"seccomp:unconfined\",\"label=disable\"],\"Privileged\":true,\"CapAdd\":[\"ALL\"],\"PortBindings\":{\"27020/udp\":[{\"HostPort\":\"27020\",\"HostIp\":\"\"}],\"27015/udp\":[{\"HostPort\":\"27015\",\"HostIp\":\"\"}],\"27015/tcp\":[{\"HostPort\":\"27015\",\"HostIp\":\"\"}],\"26900/udp\":[{\"HostPort\":\"26920\",\"HostIp\":\"\"}]},\"Binds\":[\"/F/images:/var/images:rw\"]},\"StopTimeout\":10,\"StopSignal\":\"SIGTERM\",\"OnBuild\":[],\"Env\":[\"REDIS_HOST=redis-csgonet\",\"NODE_ENV=development-local\",\"CSGO_IMAGE_PATH=/var/images/599d119bb31dd80001c79df9.qcow2\",\"CSGO_SERVER_ID=1234567\",\"CSGO_START_ARGV=-game csgo -console -usercon +game_type 0 +game_mode 1 +map de_dust2 +ip 127.0.0.1\",\"CSGO_START_EXEC=/var/app/csgo/srcds_run\",\"REDIS_PORT=6379\"],\"AttachStderr\":false,\"AttachStdout\":false,\"AttachStdin\":false},\"tags\":[\"test\",\"csgo-srcds\"],\"__v\":0}"
+				}
+			]
+		},
+		{
+			"name": "Create Server",
+			"request": {
+				"url": "http://localhost:8003/servers",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"daemonId\":\"5a0e032df3aeb70001824a56\",\n\t\"tags\":[\"test\",\"csgo-srcds\"],\n\t\"deploymentConfig\":{\n        \"name\":\"/csgosrcds_csgo-srcds_1\",\n        \"ExposedPorts\": {\n            \"8002/tcp\": {}\n        },\n        \"Env\": [\n            \"REDIS_HOST=redis-csgonet\",\n            \"NODE_ENV=development-local\",\n            \"CSGO_IMAGE_PATH=/var/images/599d119bb31dd80001c79df9.qcow2\",\n            \"CSGO_SERVER_ID=1234567\",\n            \"CSGO_START_ARGV=-game csgo -console -usercon +game_type 0 +game_mode 1 +map de_dust2 +ip 127.0.0.1\",\n            \"CSGO_START_EXEC=/var/app/csgo/srcds_run\",\n            \"REDIS_PORT=6379\"\n        ],\n        \"Cmd\":\"node server.js\",\n        \"Image\": \"csgo-srcds\",\n        \"Voumes\": {\n            \"/var/images\": {}\n        },\n        \"WorkingDir\": \"/var/app\",\n        \"HostConfig\": {\n            \"Binds\": [\n                \"/F/images:/var/images:rw\"\n            ],\n            \"PortBindings\": {\n                \"26900/udp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"26920\"\n                    }\n                ],\n                \"27015/tcp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"27015\"\n                    }\n                ],\n                \"27015/udp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"27015\"\n                    }\n                ],\n                \"27020/udp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"27020\"\n                    }\n                ]\n            },\n            \"CapAdd\": [\n                \"ALL\"\n            ],\n            \"Privileged\": true,\n            \"SecurityOpt\": [\n                \"seccomp:unconfined\",\n                \"label=disable\"\n            ]\n        }\n\t},\n\t\"image\":{\n        \"_id\": \"5a0b7bf0c11f730001d0872a\",\n        \"updatedAt\": \"2017-11-14T23:28:12.575Z\",\n        \"createdAt\": \"2017-11-14T23:27:44.461Z\",\n        \"imagePath\": \"/var/images/5a0b7bf0c11f730001d0872a.qcow2\",\n        \"name\": \"CSGO First Test\",\n        \"type\": \"BASE\",\n        \"imageSize\": \"20G\",\n        \"versionStatus\": \"TEST\",\n        \"version\": \"0.0.1\",\n        \"uniqueName\": \"csgo-test\",\n        \"containerId\": \"\",\n        \"status\": \"IDLE\",\n        \"__v\": 0,\n        \"imageList\": []\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "9640e569-32e4-48b3-84ef-fb43894528dc",
+					"name": "Base response on creation",
+					"originalRequest": {
+						"url": "http://localhost:8003/servers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"daemonId\":\"5a0de2c567d03000010140be\",\n\t\"tags\":[\"test\",\"csgo-srcds\"],\n\t\"deploymentConfig\":{\n        \"name\":\"/csgosrcds_csgo-srcds_1\",\n        \"ExposedPorts\": {\n            \"26900/udp\": {},\n            \"27015/tcp\": {},\n            \"27015/udp\": {},\n            \"27020/udp\": {},\n            \"8100/tcp\": {}\n        },\n        \"Env\": [\n            \"REDIS_HOST=redis-csgonet\",\n            \"NODE_ENV=development-local\",\n            \"CSGO_IMAGE_PATH=/var/images/599d119bb31dd80001c79df9.qcow2\",\n            \"CSGO_SERVER_ID=1234567\",\n            \"CSGO_START_ARGV=-game csgo -console -usercon +game_type 0 +game_mode 1 +map de_dust2 +ip 127.0.0.1\",\n            \"CSGO_START_EXEC=/var/app/csgo/srcds_run\",\n            \"REDIS_PORT=6379\"\n        ],\n        \"Cmd\":\"node server.js\",\n        \"Image\": \"csgosrcds_csgo-srcds\",\n        \"Voumes\": {\n            \"/var/images\": {}\n        },\n        \"WorkingDir\": \"/var/app\",\n        \"HostConfig\": {\n            \"Binds\": [\n                \"/F/images:/var/images:rw\"\n            ],\n            \"PortBindings\": {\n                \"26900/udp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"26920\"\n                    }\n                ],\n                \"27015/tcp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"27015\"\n                    }\n                ],\n                \"27015/udp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"27015\"\n                    }\n                ],\n                \"27020/udp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"27020\"\n                    }\n                ]\n            },\n            \"CapAdd\": [\n                \"ALL\"\n            ],\n            \"Privileged\": true,\n            \"SecurityOpt\": [\n                \"seccomp:unconfined\",\n                \"label=disable\"\n            ]\n        }\n\t},\n\t\"image\":{\n        \"_id\": \"5a0b7bf0c11f730001d0872a\",\n        \"updatedAt\": \"2017-11-14T23:28:12.575Z\",\n        \"createdAt\": \"2017-11-14T23:27:44.461Z\",\n        \"imagePath\": \"/var/images/5a0b7bf0c11f730001d0872a.qcow2\",\n        \"name\": \"CSGO First Test\",\n        \"type\": \"BASE\",\n        \"imageSize\": \"20G\",\n        \"versionStatus\": \"TEST\",\n        \"version\": \"0.0.1\",\n        \"uniqueName\": \"csgo-test\",\n        \"containerId\": \"\",\n        \"status\": \"IDLE\",\n        \"__v\": 0,\n        \"imageList\": []\n    }\n}"
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip",
+							"name": "Content-Encoding",
+							"description": "The type of encoding used on the data."
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Nov 2017 19:41:20 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Cpub",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 305,
+					"body": "{\"__v\":0,\"updatedAt\":\"2017-11-16T19:41:20.380Z\",\"createdAt\":\"2017-11-16T19:41:20.380Z\",\"_id\":\"5a0de9e07df740000197e65c\",\"image\":{\"_id\":\"5a0b7bf0c11f730001d0872a\",\"imagePath\":\"/var/images/5a0b7bf0c11f730001d0872a.qcow2\",\"name\":\"CSGO First Test\",\"imageSize\":\"20G\",\"version\":\"0.0.1\",\"uniqueName\":\"csgo-test\",\"containerId\":\"\",\"status\":\"IDLE\",\"versionStatus\":\"TEST\",\"type\":\"BASE\"},\"container\":{\"State\":{\"FinishedAt\":\"1970-01-01T00:00:00.000Z\",\"StartedAt\":\"1970-01-01T00:00:00.000Z\",\"Error\":\"\",\"ExitCode\":0,\"Pid\":0,\"Dead\":false,\"OOMKilled\":false,\"Restarting\":false,\"Paused\":false,\"Running\":false,\"Status\":\"created\"},\"Name\":\"\",\"Id\":\"\"},\"daemon\":{\"_id\":\"5a0de2c567d03000010140be\",\"name\":\"Localhost\",\"config\":{\"host\":\"localhost\",\"ca\":\"\",\"cert\":\"\",\"key\":\"\",\"version\":\"v1.29\",\"port\":2376}},\"deploymentConfig\":{\"name\":\"/csgosrcds_csgo-srcds_1\",\"Cmd\":\"node server.js\",\"Image\":\"csgosrcds_csgo-srcds\",\"WorkingDir\":\"/var/app\",\"HostConfig\":{\"SecurityOpt\":[\"seccomp:unconfined\",\"label=disable\"],\"Privileged\":true,\"CapAdd\":[\"ALL\"],\"PortBindings\":{\"27020/udp\":[{\"HostPort\":\"27020\",\"HostIp\":\"\"}],\"27015/udp\":[{\"HostPort\":\"27015\",\"HostIp\":\"\"}],\"27015/tcp\":[{\"HostPort\":\"27015\",\"HostIp\":\"\"}],\"26900/udp\":[{\"HostPort\":\"26920\",\"HostIp\":\"\"}]},\"Binds\":[\"/F/images:/var/images:rw\"]},\"StopTimeout\":10,\"StopSignal\":\"SIGTERM\",\"OnBuild\":[],\"Env\":[\"REDIS_HOST=redis-csgonet\",\"NODE_ENV=development-local\",\"CSGO_IMAGE_PATH=/var/images/599d119bb31dd80001c79df9.qcow2\",\"CSGO_SERVER_ID=1234567\",\"CSGO_START_ARGV=-game csgo -console -usercon +game_type 0 +game_mode 1 +map de_dust2 +ip 127.0.0.1\",\"CSGO_START_EXEC=/var/app/csgo/srcds_run\",\"REDIS_PORT=6379\"],\"AttachStderr\":false,\"AttachStdout\":false,\"AttachStdin\":false},\"tags\":[\"test\",\"csgo-srcds\"]}"
+				}
+			]
+		},
+		{
+			"name": "Create Base Server",
+			"request": {
+				"url": "http://localhost:8003/servers",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"daemonId\":\"5a0e032df3aeb70001824a56\",\n\t\"tags\":[\"core\",\"csgo-images\"],\n\t\"deploymentConfig\":{\n        \"name\":\"csgo-images-1\",\n        \"ExposedPorts\": {\n\n        },\n        \"Env\": [\n\t\t      \"NODE_ENV=development\",\n\t\t      \"PORT=8002\",\n\t\t      \"MONGDB_DEBUG=true\",\n\t\t      \"MONGODB_CONNECTION_STRING=mongodb://mongo:27017/service-images\",\n\t\t      \"NATS_CONNECTION_URI=nats://nats-csgonet:4222\"\n        ],\n        \"Cmd\":\"node server.js\",\n        \"Image\": \"csgo-images\",\n        \"Voumes\": {\n            \"/var/images\": {}\n        },\n        \"WorkingDir\": \"/var/app\",\n        \"HostConfig\": {\n            \"Binds\": [\n                \"/F/images:/var/images:rw\"\n            ],\n            \"PortBindings\": {\n                \"26900/udp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"26920\"\n                    }\n                ],\n                \"27015/tcp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"27015\"\n                    }\n                ],\n                \"27015/udp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"27015\"\n                    }\n                ],\n                \"27020/udp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"27020\"\n                    }\n                ]\n            },\n            \"CapAdd\": [\n                \"ALL\"\n            ],\n            \"Privileged\": true,\n            \"SecurityOpt\": [\n                \"seccomp:unconfined\",\n                \"label=disable\"\n            ]\n        }\n\t},\n\t\"image\":{\n        \"_id\": \"5a0b7bf0c11f730001d0872a\",\n        \"updatedAt\": \"2017-11-14T23:28:12.575Z\",\n        \"createdAt\": \"2017-11-14T23:27:44.461Z\",\n        \"imagePath\": \"/var/images/5a0b7bf0c11f730001d0872a.qcow2\",\n        \"name\": \"CSGO First Test\",\n        \"type\": \"BASE\",\n        \"imageSize\": \"20G\",\n        \"versionStatus\": \"TEST\",\n        \"version\": \"0.0.1\",\n        \"uniqueName\": \"csgo-test\",\n        \"containerId\": \"\",\n        \"status\": \"IDLE\",\n        \"__v\": 0,\n        \"imageList\": []\n    }\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "2bd084be-fba0-4c17-9788-43ee8e4ff99b",
+					"name": "Base response on creation",
+					"originalRequest": {
+						"url": "http://localhost:8003/servers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"daemonId\":\"5a0de2c567d03000010140be\",\n\t\"tags\":[\"test\",\"csgo-srcds\"],\n\t\"deploymentConfig\":{\n        \"name\":\"/csgosrcds_csgo-srcds_1\",\n        \"ExposedPorts\": {\n            \"26900/udp\": {},\n            \"27015/tcp\": {},\n            \"27015/udp\": {},\n            \"27020/udp\": {},\n            \"8100/tcp\": {}\n        },\n        \"Env\": [\n            \"REDIS_HOST=redis-csgonet\",\n            \"NODE_ENV=development-local\",\n            \"CSGO_IMAGE_PATH=/var/images/599d119bb31dd80001c79df9.qcow2\",\n            \"CSGO_SERVER_ID=1234567\",\n            \"CSGO_START_ARGV=-game csgo -console -usercon +game_type 0 +game_mode 1 +map de_dust2 +ip 127.0.0.1\",\n            \"CSGO_START_EXEC=/var/app/csgo/srcds_run\",\n            \"REDIS_PORT=6379\"\n        ],\n        \"Cmd\":\"node server.js\",\n        \"Image\": \"csgosrcds_csgo-srcds\",\n        \"Voumes\": {\n            \"/var/images\": {}\n        },\n        \"WorkingDir\": \"/var/app\",\n        \"HostConfig\": {\n            \"Binds\": [\n                \"/F/images:/var/images:rw\"\n            ],\n            \"PortBindings\": {\n                \"26900/udp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"26920\"\n                    }\n                ],\n                \"27015/tcp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"27015\"\n                    }\n                ],\n                \"27015/udp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"27015\"\n                    }\n                ],\n                \"27020/udp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"27020\"\n                    }\n                ]\n            },\n            \"CapAdd\": [\n                \"ALL\"\n            ],\n            \"Privileged\": true,\n            \"SecurityOpt\": [\n                \"seccomp:unconfined\",\n                \"label=disable\"\n            ]\n        }\n\t},\n\t\"image\":{\n        \"_id\": \"5a0b7bf0c11f730001d0872a\",\n        \"updatedAt\": \"2017-11-14T23:28:12.575Z\",\n        \"createdAt\": \"2017-11-14T23:27:44.461Z\",\n        \"imagePath\": \"/var/images/5a0b7bf0c11f730001d0872a.qcow2\",\n        \"name\": \"CSGO First Test\",\n        \"type\": \"BASE\",\n        \"imageSize\": \"20G\",\n        \"versionStatus\": \"TEST\",\n        \"version\": \"0.0.1\",\n        \"uniqueName\": \"csgo-test\",\n        \"containerId\": \"\",\n        \"status\": \"IDLE\",\n        \"__v\": 0,\n        \"imageList\": []\n    }\n}"
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip",
+							"name": "Content-Encoding",
+							"description": "The type of encoding used on the data."
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Nov 2017 19:41:20 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Cpub",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 305,
+					"body": "{\"__v\":0,\"updatedAt\":\"2017-11-16T19:41:20.380Z\",\"createdAt\":\"2017-11-16T19:41:20.380Z\",\"_id\":\"5a0de9e07df740000197e65c\",\"image\":{\"_id\":\"5a0b7bf0c11f730001d0872a\",\"imagePath\":\"/var/images/5a0b7bf0c11f730001d0872a.qcow2\",\"name\":\"CSGO First Test\",\"imageSize\":\"20G\",\"version\":\"0.0.1\",\"uniqueName\":\"csgo-test\",\"containerId\":\"\",\"status\":\"IDLE\",\"versionStatus\":\"TEST\",\"type\":\"BASE\"},\"container\":{\"State\":{\"FinishedAt\":\"1970-01-01T00:00:00.000Z\",\"StartedAt\":\"1970-01-01T00:00:00.000Z\",\"Error\":\"\",\"ExitCode\":0,\"Pid\":0,\"Dead\":false,\"OOMKilled\":false,\"Restarting\":false,\"Paused\":false,\"Running\":false,\"Status\":\"created\"},\"Name\":\"\",\"Id\":\"\"},\"daemon\":{\"_id\":\"5a0de2c567d03000010140be\",\"name\":\"Localhost\",\"config\":{\"host\":\"localhost\",\"ca\":\"\",\"cert\":\"\",\"key\":\"\",\"version\":\"v1.29\",\"port\":2376}},\"deploymentConfig\":{\"name\":\"/csgosrcds_csgo-srcds_1\",\"Cmd\":\"node server.js\",\"Image\":\"csgosrcds_csgo-srcds\",\"WorkingDir\":\"/var/app\",\"HostConfig\":{\"SecurityOpt\":[\"seccomp:unconfined\",\"label=disable\"],\"Privileged\":true,\"CapAdd\":[\"ALL\"],\"PortBindings\":{\"27020/udp\":[{\"HostPort\":\"27020\",\"HostIp\":\"\"}],\"27015/udp\":[{\"HostPort\":\"27015\",\"HostIp\":\"\"}],\"27015/tcp\":[{\"HostPort\":\"27015\",\"HostIp\":\"\"}],\"26900/udp\":[{\"HostPort\":\"26920\",\"HostIp\":\"\"}]},\"Binds\":[\"/F/images:/var/images:rw\"]},\"StopTimeout\":10,\"StopSignal\":\"SIGTERM\",\"OnBuild\":[],\"Env\":[\"REDIS_HOST=redis-csgonet\",\"NODE_ENV=development-local\",\"CSGO_IMAGE_PATH=/var/images/599d119bb31dd80001c79df9.qcow2\",\"CSGO_SERVER_ID=1234567\",\"CSGO_START_ARGV=-game csgo -console -usercon +game_type 0 +game_mode 1 +map de_dust2 +ip 127.0.0.1\",\"CSGO_START_EXEC=/var/app/csgo/srcds_run\",\"REDIS_PORT=6379\"],\"AttachStderr\":false,\"AttachStdout\":false,\"AttachStdin\":false},\"tags\":[\"test\",\"csgo-srcds\"]}"
+				}
+			]
+		},
+		{
+			"name": "Control Server",
+			"request": {
+				"url": "http://localhost:8003/servers",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"daemonId\":\"\",\n\t\"tags\":[],\n\t\"deploymentConfig\":{},\n\t\"image\":{}\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "e2cfaf85-9a03-4804-8db3-4e89098e1e02",
+					"name": "Base response on creation",
+					"originalRequest": {
+						"url": "http://localhost:8003/servers",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"daemonId\":\"5a0de2c567d03000010140be\",\n\t\"tags\":[\"test\",\"csgo-srcds\"],\n\t\"deploymentConfig\":{\n        \"name\":\"/csgosrcds_csgo-srcds_1\",\n        \"ExposedPorts\": {\n            \"26900/udp\": {},\n            \"27015/tcp\": {},\n            \"27015/udp\": {},\n            \"27020/udp\": {},\n            \"8100/tcp\": {}\n        },\n        \"Env\": [\n            \"REDIS_HOST=redis-csgonet\",\n            \"NODE_ENV=development-local\",\n            \"CSGO_IMAGE_PATH=/var/images/599d119bb31dd80001c79df9.qcow2\",\n            \"CSGO_SERVER_ID=1234567\",\n            \"CSGO_START_ARGV=-game csgo -console -usercon +game_type 0 +game_mode 1 +map de_dust2 +ip 127.0.0.1\",\n            \"CSGO_START_EXEC=/var/app/csgo/srcds_run\",\n            \"REDIS_PORT=6379\"\n        ],\n        \"Cmd\":\"node server.js\",\n        \"Image\": \"csgosrcds_csgo-srcds\",\n        \"Voumes\": {\n            \"/var/images\": {}\n        },\n        \"WorkingDir\": \"/var/app\",\n        \"HostConfig\": {\n            \"Binds\": [\n                \"/F/images:/var/images:rw\"\n            ],\n            \"PortBindings\": {\n                \"26900/udp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"26920\"\n                    }\n                ],\n                \"27015/tcp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"27015\"\n                    }\n                ],\n                \"27015/udp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"27015\"\n                    }\n                ],\n                \"27020/udp\": [\n                    {\n                        \"HostIp\": \"\",\n                        \"HostPort\": \"27020\"\n                    }\n                ]\n            },\n            \"CapAdd\": [\n                \"ALL\"\n            ],\n            \"Privileged\": true,\n            \"SecurityOpt\": [\n                \"seccomp:unconfined\",\n                \"label=disable\"\n            ]\n        }\n\t},\n\t\"image\":{\n        \"_id\": \"5a0b7bf0c11f730001d0872a\",\n        \"updatedAt\": \"2017-11-14T23:28:12.575Z\",\n        \"createdAt\": \"2017-11-14T23:27:44.461Z\",\n        \"imagePath\": \"/var/images/5a0b7bf0c11f730001d0872a.qcow2\",\n        \"name\": \"CSGO First Test\",\n        \"type\": \"BASE\",\n        \"imageSize\": \"20G\",\n        \"versionStatus\": \"TEST\",\n        \"version\": \"0.0.1\",\n        \"uniqueName\": \"csgo-test\",\n        \"containerId\": \"\",\n        \"status\": \"IDLE\",\n        \"__v\": 0,\n        \"imageList\": []\n    }\n}"
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip",
+							"name": "Content-Encoding",
+							"description": "The type of encoding used on the data."
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Nov 2017 19:41:20 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Cpub",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 305,
+					"body": "{\"__v\":0,\"updatedAt\":\"2017-11-16T19:41:20.380Z\",\"createdAt\":\"2017-11-16T19:41:20.380Z\",\"_id\":\"5a0de9e07df740000197e65c\",\"image\":{\"_id\":\"5a0b7bf0c11f730001d0872a\",\"imagePath\":\"/var/images/5a0b7bf0c11f730001d0872a.qcow2\",\"name\":\"CSGO First Test\",\"imageSize\":\"20G\",\"version\":\"0.0.1\",\"uniqueName\":\"csgo-test\",\"containerId\":\"\",\"status\":\"IDLE\",\"versionStatus\":\"TEST\",\"type\":\"BASE\"},\"container\":{\"State\":{\"FinishedAt\":\"1970-01-01T00:00:00.000Z\",\"StartedAt\":\"1970-01-01T00:00:00.000Z\",\"Error\":\"\",\"ExitCode\":0,\"Pid\":0,\"Dead\":false,\"OOMKilled\":false,\"Restarting\":false,\"Paused\":false,\"Running\":false,\"Status\":\"created\"},\"Name\":\"\",\"Id\":\"\"},\"daemon\":{\"_id\":\"5a0de2c567d03000010140be\",\"name\":\"Localhost\",\"config\":{\"host\":\"localhost\",\"ca\":\"\",\"cert\":\"\",\"key\":\"\",\"version\":\"v1.29\",\"port\":2376}},\"deploymentConfig\":{\"name\":\"/csgosrcds_csgo-srcds_1\",\"Cmd\":\"node server.js\",\"Image\":\"csgosrcds_csgo-srcds\",\"WorkingDir\":\"/var/app\",\"HostConfig\":{\"SecurityOpt\":[\"seccomp:unconfined\",\"label=disable\"],\"Privileged\":true,\"CapAdd\":[\"ALL\"],\"PortBindings\":{\"27020/udp\":[{\"HostPort\":\"27020\",\"HostIp\":\"\"}],\"27015/udp\":[{\"HostPort\":\"27015\",\"HostIp\":\"\"}],\"27015/tcp\":[{\"HostPort\":\"27015\",\"HostIp\":\"\"}],\"26900/udp\":[{\"HostPort\":\"26920\",\"HostIp\":\"\"}]},\"Binds\":[\"/F/images:/var/images:rw\"]},\"StopTimeout\":10,\"StopSignal\":\"SIGTERM\",\"OnBuild\":[],\"Env\":[\"REDIS_HOST=redis-csgonet\",\"NODE_ENV=development-local\",\"CSGO_IMAGE_PATH=/var/images/599d119bb31dd80001c79df9.qcow2\",\"CSGO_SERVER_ID=1234567\",\"CSGO_START_ARGV=-game csgo -console -usercon +game_type 0 +game_mode 1 +map de_dust2 +ip 127.0.0.1\",\"CSGO_START_EXEC=/var/app/csgo/srcds_run\",\"REDIS_PORT=6379\"],\"AttachStderr\":false,\"AttachStdout\":false,\"AttachStdin\":false},\"tags\":[\"test\",\"csgo-srcds\"]}"
+				}
+			]
+		},
+		{
+			"name": "List Docker Daemons",
+			"request": {
+				"url": "http://localhost:8003/daemons",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "ae2cd4e0-d502-4f72-8f65-8d162fc54a2b",
+					"name": "Basic Response",
+					"originalRequest": {
+						"url": "http://localhost:8003/daemons",
+						"method": "GET",
+						"header": [],
+						"body": {}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip",
+							"name": "Content-Encoding",
+							"description": "The type of encoding used on the data."
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Nov 2017 19:11:09 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Cpub",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 53,
+					"body": "[{\"_id\":\"5a0de2c567d03000010140be\",\"updatedAt\":\"2017-11-16T19:11:01.257Z\",\"createdAt\":\"2017-11-16T19:11:01.257Z\",\"name\":\"Localhost\",\"__v\":0,\"status\":\"VERIFYING\",\"config\":{\"host\":\"localhost\",\"ca\":\"\",\"cert\":\"\",\"key\":\"\",\"version\":\"v1.29\",\"port\":2376}}]"
+				}
+			]
+		},
+		{
+			"name": "Add Docker Daemon",
+			"request": {
+				"url": "http://localhost:8003/daemons",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"remote-dev\",\r\n    \"config\":{\r\n        \"host\":\"csgopub.rasterized.net\",\r\n        \"port\": 2376,\r\n        \"ca\": \"/var/app/ssl/ca.pem\",\r\n        \"cert\": \"/var/app/ssl/cert.pem\",\r\n        \"key\": \"/var/app/ssl/key.pem\",\r\n        \"version\":\"v1.29\"\r\n    }\r\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "fb455689-62ae-4a9b-9276-6fec68e42b4d",
+					"name": "Basic Response",
+					"originalRequest": {
+						"url": "http://localhost:8003/daemons",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Localhost\",\r\n    \"config\":{\r\n        \"host\":\"localhost\",\r\n        \"port\": 2376,\r\n        \"ca\": \"\",\r\n        \"cert\": \"\",\r\n        \"key\": \"\",\r\n        \"version\":\"v1.29\"\r\n    }\r\n}"
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip",
+							"name": "Content-Encoding",
+							"description": "The type of encoding used on the data."
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Nov 2017 19:11:01 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Cpub",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 98,
+					"body": "{\"__v\":0,\"updatedAt\":\"2017-11-16T19:11:01.257Z\",\"createdAt\":\"2017-11-16T19:11:01.257Z\",\"name\":\"Localhost\",\"_id\":\"5a0de2c567d03000010140be\",\"status\":\"VERIFYING\",\"config\":{\"host\":\"localhost\",\"ca\":\"\",\"cert\":\"\",\"key\":\"\",\"version\":\"v1.29\",\"port\":2376}}"
+				}
+			]
+		}
+	]
+}

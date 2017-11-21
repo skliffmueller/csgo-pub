@@ -1,0 +1,418 @@
+{
+	"variables": [],
+	"info": {
+		"name": "CSGO-Images",
+		"_postman_id": "f78a78cf-4729-6d11-0996-9dbe8b1a119c",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List Images",
+			"request": {
+				"url": "http://localhost:8002/images",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "4094ca8e-7424-4be8-895d-f6f39549f7d5",
+					"name": "Basic Response",
+					"originalRequest": {
+						"url": "http://localhost:8002/images",
+						"method": "GET",
+						"header": [],
+						"body": {}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip",
+							"name": "Content-Encoding",
+							"description": "The type of encoding used on the data."
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 14 Nov 2017 23:28:32 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Cpub",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 35,
+					"body": "[{\"_id\":\"5a0b7bf0c11f730001d0872a\",\"updatedAt\":\"2017-11-14T23:28:12.575Z\",\"createdAt\":\"2017-11-14T23:27:44.461Z\",\"imagePath\":\"/var/images/5a0b7bf0c11f730001d0872a.qcow2\",\"name\":\"CSGO First Test\",\"type\":\"BASE\",\"imageSize\":\"20G\",\"versionStatus\":\"TEST\",\"version\":\"0.0.1\",\"uniqueName\":\"csgo-test\",\"containerId\":\"\",\"status\":\"IDLE\",\"__v\":0,\"imageList\":[]}]"
+				}
+			]
+		},
+		{
+			"name": "Create Base Image",
+			"request": {
+				"url": "http://localhost:8002/images",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"CSGO First Test\",\n\t\"type\":\"BASE\",\n\t\"imageSize\":\"20G\",\n\t\"versionStatus\":\"TEST\",\n\t\"version\":\"0.0.1\",\n\t\"uniqueName\":\"csgo-test\",\n\t\"imageList\":[]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "42882142-d56f-4339-84ec-97f8340a721e",
+					"name": "Basic Reponse",
+					"originalRequest": {
+						"url": "http://localhost:8002/images",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"CSGO First Test\",\n\t\"type\":\"BASE\",\n\t\"imageSize\":\"20G\",\n\t\"versionStatus\":\"TEST\",\n\t\"version\":\"0.0.1\",\n\t\"uniqueName\":\"csgo-test\",\n\t\"imageList\":[]\n}"
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip",
+							"name": "Content-Encoding",
+							"description": "The type of encoding used on the data."
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 14 Nov 2017 23:27:44 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Cpub",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 140,
+					"body": "{\"__v\":0,\"updatedAt\":\"2017-11-14T23:27:44.461Z\",\"createdAt\":\"2017-11-14T23:27:44.461Z\",\"imagePath\":\"/var/images/5a0b7bf0c11f730001d0872a.qcow2\",\"name\":\"CSGO First Test\",\"type\":\"BASE\",\"imageSize\":\"20G\",\"versionStatus\":\"TEST\",\"version\":\"0.0.1\",\"uniqueName\":\"csgo-test\",\"containerId\":\"\",\"status\":\"IDLE\",\"_id\":\"5a0b7bf0c11f730001d0872a\",\"imageList\":[]}"
+				}
+			]
+		},
+		{
+			"name": "Mount Image to directory",
+			"request": {
+				"url": "http://localhost:8002/images/5a10d3d0de730b0001d6e2ed/modify",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"status\":\"MOUNTED\",\n\t\"options\":{\n\t\t\"config\":[\n            \"@ShutdownOnFailedCommand 0\",\n            \"@NoPromptForPassword 1\",\n            \"login anonymous\",\n            \"force_install_dir /var/app/csgo\",\n            \"app_update 740 validate\",\n            \"quit\"\n        ],\n        \"mountPath\":\"/var/app/csgo\"\n\t}\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "07e6e517-9597-4ebd-b1e7-7866bc37174e",
+					"name": "Basic Response",
+					"originalRequest": {
+						"url": "http://csgopub.rasterized.net:8002/images/5a10d3d0de730b0001d6e2ed/modify",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"status\":\"MOUNTED\"\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip",
+							"name": "Content-Encoding",
+							"description": "The type of encoding used on the data."
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 19 Nov 2017 02:24:36 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Cpub",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 290,
+					"body": "{\"_id\":\"5a10d3d0de730b0001d6e2ed\",\"updatedAt\":\"2017-11-19T01:23:32.724Z\",\"createdAt\":\"2017-11-19T00:44:00.174Z\",\"imagePath\":\"/var/images/5a10d3d0de730b0001d6e2ed.qcow2\",\"name\":\"CSGO First Test\",\"type\":\"BASE\",\"imageSize\":\"20G\",\"versionStatus\":\"TEST\",\"version\":\"0.0.1\",\"uniqueName\":\"csgo-test\",\"containerId\":\"\",\"status\":\"IDLE\",\"imageList\":[],\"__v\":0}"
+				}
+			]
+		},
+		{
+			"name": "Steamcmd Image Creation",
+			"request": {
+				"url": "http://localhost:8002/images/599d0a1bb31dd80001c79df7/modify",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"status\":\"STEAMCMD\",\n\t\"options\":{\n\t\t\"config\":[\n            \"@ShutdownOnFailedCommand 0\",\n            \"@NoPromptForPassword 1\",\n            \"login anonymous\",\n            \"force_install_dir /var/app/csgo\",\n            \"app_update 740 validate\",\n            \"quit\"\n        ],\n        \"installDir\":\"/var/app/csgo\"\n\t}\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "d7eefd4d-ed11-4b30-a155-7f9f692363d5",
+					"name": "Basic Response",
+					"originalRequest": {
+						"url": "http://localhost:8002/images/5a0b7bf0c11f730001d0872a/modify",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"status\":\"STEAMCMD\",\n\t\"options\":{\n\t\t\"config\":[\n            \"@ShutdownOnFailedCommand 0\",\n            \"@NoPromptForPassword 1\",\n            \"login anonymous\",\n            \"force_install_dir /var/app/csgo\",\n            \"app_update 740 validate\",\n            \"quit\"\n        ],\n        \"installDir\":\"/var/app/csgo\"\n\t}\n}"
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip",
+							"name": "Content-Encoding",
+							"description": "The type of encoding used on the data."
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Nov 2017 00:27:14 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Cpub",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 116,
+					"body": "{\"_id\":\"5a0b7bf0c11f730001d0872a\",\"updatedAt\":\"2017-11-15T00:11:49.268Z\",\"createdAt\":\"2017-11-14T23:27:44.461Z\",\"imagePath\":\"/var/images/5a0b7bf0c11f730001d0872a.qcow2\",\"name\":\"CSGO First Test\",\"type\":\"BASE\",\"imageSize\":\"20G\",\"versionStatus\":\"TEST\",\"version\":\"0.0.1\",\"uniqueName\":\"csgo-test\",\"containerId\":\"\",\"status\":\"IDLE\",\"imageList\":[],\"__v\":0}"
+				}
+			]
+		},
+		{
+			"name": "Create Container Image",
+			"request": {
+				"url": "http://localhost:8002/images",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"CSGO First Test Container\",\n\t\"type\":\"CONTAINER\",\n\t\"imageSize\":\"20G\",\n\t\"versionStatus\":\"TEST\",\n\t\"version\":\"0.0.1\",\n\t\"uniqueName\":\"csgo-test-container\",\n\t\"imageList\":[{\n\t\t\"_id\": \"599d0a1bb31dd80001c79df7\",\n\t\t\"imagePath\": \"/var/images/599d0a1bb31dd80001c79df7.qcow2\",\n\t\t\"version\": \"0.0.1\",\n\t\t\"uniqueName\": \"csgo-test\"\n\t}]\n}"
+				},
+				"description": ""
+			},
+			"response": [
+				{
+					"id": "6b37122c-2aa2-47b1-ab1d-09fdeea421ba",
+					"name": "Basic Response",
+					"originalRequest": {
+						"url": "http://localhost:8002/images",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\":\"CSGO First Test Container\",\n\t\"type\":\"CONTAINER\",\n\t\"imageSize\":\"20G\",\n\t\"versionStatus\":\"TEST\",\n\t\"version\":\"0.0.1\",\n\t\"uniqueName\":\"csgo-test-container\",\n\t\"imageList\":[{\n\t\t\"_id\": \"5a0b7bf0c11f730001d0872a\",\n\t\t\"imagePath\": \"/var/images/5a0b7bf0c11f730001d0872a.qcow2\",\n\t\t\"version\": \"0.0.1\",\n\t\t\"uniqueName\": \"csgo-test\"\n\t}]\n}"
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"_postman_previewtype": "text",
+					"header": [
+						{
+							"key": "Connection",
+							"value": "keep-alive",
+							"name": "Connection",
+							"description": "Options that are desired for the connection"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip",
+							"name": "Content-Encoding",
+							"description": "The type of encoding used on the data."
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"name": "Content-Type",
+							"description": "The mime type of this content"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 15 Nov 2017 00:32:31 GMT",
+							"name": "Date",
+							"description": "The date and time that the message was sent"
+						},
+						{
+							"key": "Server",
+							"value": "Cpub",
+							"name": "Server",
+							"description": "A name for the server"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked",
+							"name": "Transfer-Encoding",
+							"description": "The form of encoding used to safely transfer the entity to the user. Currently defined methods are: chunked, compress, deflate, gzip, identity."
+						}
+					],
+					"cookie": [],
+					"responseTime": 221,
+					"body": "{\"__v\":0,\"updatedAt\":\"2017-11-15T00:32:31.470Z\",\"createdAt\":\"2017-11-15T00:32:31.470Z\",\"imagePath\":\"/var/images/5a0b8b1f33b7e90001ea9597.qcow2\",\"name\":\"CSGO First Test Container\",\"type\":\"CONTAINER\",\"imageSize\":\"20G\",\"versionStatus\":\"TEST\",\"version\":\"0.0.1\",\"uniqueName\":\"csgo-test-container\",\"containerId\":\"\",\"status\":\"IDLE\",\"_id\":\"5a0b8b1f33b7e90001ea9597\",\"imageList\":[{\"_id\":\"5a0b7bf0c11f730001d0872a\",\"imagePath\":\"/var/images/5a0b7bf0c11f730001d0872a.qcow2\",\"version\":\"0.0.1\",\"uniqueName\":\"csgo-test\"}]}"
+				}
+			]
+		}
+	]
+}
