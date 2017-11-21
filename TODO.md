@@ -13,7 +13,7 @@
 ### csgo-images
 - Documentation
 
-## csgo-images-worker
+### csgo-images-worker
 - Isolate steamcmd installation process, and make into it's own docker container
 - Verify sockets are getting transmitted correctly to client
 
