@@ -5,7 +5,11 @@ Storage space is costly, and server management isn't scaleable by hiring more se
 
 ## API Documentation
 
-There is currently no api documentation. There are Postman exports with example responses and queries for the Images and Servers API. Which should be enough for the technical mind to use. The translation will be documented in future releases.
+[Images API Documentation](./CSGO-Images-API-Doc.html)
+[Servers API Documentation](./CSGO-Servers-API-Doc.html)
+
+These are generated based on the Postman export. More details need to be itterated about what each field means.
+Socket.io has been freehanded, and has not been tested fully or debugged. Documentation will come soon after thorough testing.
 
 ## High Level Architecture
 
@@ -32,4 +36,4 @@ The docker images created to be deployed by the server service consists of the f
 
 These docker images are designed to accept Redis connection information and send the stdout to the redis server. Rcon is also available on most game server protocols which is integrated into the server API.
 
-![Server Layout](/CSGO-pub-flowchart.png)
+![Server Layout](./CSGO-pub-flowchart.png)

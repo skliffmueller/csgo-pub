@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CSGO-Images</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/monokai-sublime.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>
+        hljs.configure({
+            tabReplace: '    ',
+        });
+        hljs.initHighlightingOnLoad();
+    </script>
+    <style>body {
+    position: relative;
+}
+
+h1 {
+    margin-top: 5px;
+}
+
+h1, h2, h3, h4 {
+    color: #2b2b2b;
+}
+
+h2:after {
+    content: ' ';
+}
+
+h5 {
+    font-weight: bold;
+}
+
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+    display: none;
+    position: absolute;
+    margin-left: 8px;
+}
+
+h1:hover a, h2:hover a, h3:hover a, h4:hover a, h5:hover a, h6:hover a {
+    color: #a5a5a5;
+    display: initial;
+}
+
+.nav.nav-tabs > li > a {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.tab-content {
+    padding-top: 8px;
+}
+
+.table {
+    margin-bottom: 8px;
+}
+
+pre {
+    border-radius: 0px;
+    border: none;
+}
+
+pre code {
+    margin: -9.5px;
+}
+
+.request {
+    margin-top: 12px;
+    margin-bottom: 24px;
+}
+
+.response-text-sample {
+    padding: 0px !important;
+}
+
+.response-text-sample pre {
+    margin-bottom: 0px;
+}
+
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 250px;
+    width: 250px;
+    height: 100%;
+    margin-left: -250px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: #2b2b2b;
+    padding-top: 20px;
+}
+
+#sidebar-wrapper ul {
+    width: 250px;
+}
+
+#sidebar-wrapper ul li {
+    margin-right: 10px;
+}
+
+#sidebar-wrapper ul li a:hover {
+    background: inherit;
+    text-decoration: none;
+}
+
+#sidebar-wrapper ul li a {
+    display: block;
+    color: #ECF0F1;
+    padding: 6px 15px;
+}
+
+#sidebar-wrapper ul li ul {
+    padding-left: 25px;
+}
+
+#sidebar-wrapper ul li ul li a {
+    padding: 1px 0px;
+}
+
+#sidebar-wrapper ul li a:hover,
+#sidebar-wrapper ul li a:focus {
+    color: #e0c46c;
+    border-right: solid 1px #e0c46c;
+}
+
+#sidebar-wrapper ul li.active > a {
+    color: #e0c46c;
+    border-right: solid 3px #e0c46c;
+}
+
+#sidebar-wrapper ul li:not(.active) ul {
+    display: none;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    position: absolute;
+    padding: 15px 15px 15px 250px;
+}
+</style>
+</head>
+<body data-spy="scroll" data-target=".scrollspy">
+<div id="sidebar-wrapper">
+    <div class="scrollspy">
+    <ul id="main-menu" data-spy="affix" class="nav">
+        <li>
+            <a href="#doc-general-notes">General notes</a>
+        </li>
+        
+        <li>
+            <a href="#doc-api-detail">API detail</a>
+        </li>
+        
+        <li>
+            <a href="#request-list-images">List Images</a>
+        </li>
+        
+        <li>
+            <a href="#request-create-base-image">Create Base Image</a>
+        </li>
+        
+        <li>
+            <a href="#request-mount-image-to-directory">Mount Image to directory</a>
+        </li>
+        
+        <li>
+            <a href="#request-steamcmd-image-creation">Steamcmd Image Creation</a>
+        </li>
+        
+        <li>
+            <a href="#request-create-container-image">Create Container Image</a>
+        </li>
+        
+        
+    </ul>
+</div>
+
+</div>
+<div id="page-content-wrapper">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>CSGO-Images</h1>
+
+                <h2 id="doc-general-notes">
+                    General notes
+                    <a href="#doc-general-notes"><i class="glyphicon glyphicon-link"></i></a>
+                </h2>
+
+                
+
+                
+
+                <h2 id="doc-api-detail">
+                    API detail
+                    <a href="#doc-api-detail"><i class="glyphicon glyphicon-link"></i></a>
+                </h2>
+
+                
+                
+                <div class="request">
+
+                    <h3 id="request-list-images">
+                        List Images
+                        <a href="#request-list-images"><i class="glyphicon glyphicon-link"></i></a>
+                    </h3>
+
+                    <div></div>
+
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#request-list-images-example-curl" data-toggle="tab">Curl</a></li>
+                            <li role="presentation"><a href="#request-list-images-example-http" data-toggle="tab">HTTP</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="request-list-images-example-curl">
+                                <pre><code class="hljs curl">curl -X GET "http://localhost:8002/images"</code></pre>
+                            </div>
+                            <div class="tab-pane" id="request-list-images-example-http">
+                                <pre><code class="hljs http">GET /images HTTP/1.1
+Host: localhost:8002</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            
+                            <li role="presentation" class="active">
+                                <a href="#request-list-images-responses-612f2482-7b71-15cb-e44e-7949986f48c8" data-toggle="tab">
+                                    
+                                    Response
+                                    
+                                </a>
+                            </li>
+                            
+                        </ul>
+                        <div class="tab-content">
+                            
+                            <div class="tab-pane active" id="request-list-images-responses-612f2482-7b71-15cb-e44e-7949986f48c8">
+                                <table class="table table-bordered">
+                                    <tr><th style="width: 20%;">Status</th><td>200 </td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Connection</th><td>keep-alive</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Content-Encoding</th><td>gzip</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Content-Type</th><td>application/json</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Date</th><td>Tue, 14 Nov 2017 23:28:32 GMT</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Server</th><td>Cpub</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Transfer-Encoding</th><td>chunked</td></tr>
+                                    
+                                    
+                                    
+                                    <tr><td class="response-text-sample" colspan="2">
+                                        <pre><code>[
+    {
+        "_id": "5a0b7bf0c11f730001d0872a",
+        "updatedAt": "2017-11-14T23:28:12.575Z",
+        "createdAt": "2017-11-14T23:27:44.461Z",
+        "imagePath": "/var/images/5a0b7bf0c11f730001d0872a.qcow2",
+        "name": "CSGO First Test",
+        "type": "BASE",
+        "imageSize": "20G",
+        "versionStatus": "TEST",
+        "version": "0.0.1",
+        "uniqueName": "csgo-test",
+        "containerId": "",
+        "status": "IDLE",
+        "__v": 0,
+        "imageList": []
+    }
+]</code></pre>
+                                    </td></tr>
+                                    
+                                    
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+
+                    <hr>
+                </div>
+                
+                
+                <div class="request">
+
+                    <h3 id="request-create-base-image">
+                        Create Base Image
+                        <a href="#request-create-base-image"><i class="glyphicon glyphicon-link"></i></a>
+                    </h3>
+
+                    <div></div>
+
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#request-create-base-image-example-curl" data-toggle="tab">Curl</a></li>
+                            <li role="presentation"><a href="#request-create-base-image-example-http" data-toggle="tab">HTTP</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="request-create-base-image-example-curl">
+                                <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+	"name":"CSGO First Test",
+	"type":"BASE",
+	"imageSize":"20G",
+	"versionStatus":"TEST",
+	"version":"0.0.1",
+	"uniqueName":"csgo-test",
+	"imageList":[]
+}' "http://localhost:8002/images"</code></pre>
+                            </div>
+                            <div class="tab-pane" id="request-create-base-image-example-http">
+                                <pre><code class="hljs http">POST /images HTTP/1.1
+Host: localhost:8002
+Content-Type: application/json
+
+{
+	"name":"CSGO First Test",
+	"type":"BASE",
+	"imageSize":"20G",
+	"versionStatus":"TEST",
+	"version":"0.0.1",
+	"uniqueName":"csgo-test",
+	"imageList":[]
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            
+                            <li role="presentation" class="active">
+                                <a href="#request-create-base-image-responses-9543c936-9edc-e246-dfef-33cfaa385d57" data-toggle="tab">
+                                    
+                                    Response
+                                    
+                                </a>
+                            </li>
+                            
+                        </ul>
+                        <div class="tab-content">
+                            
+                            <div class="tab-pane active" id="request-create-base-image-responses-9543c936-9edc-e246-dfef-33cfaa385d57">
+                                <table class="table table-bordered">
+                                    <tr><th style="width: 20%;">Status</th><td>201 </td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Connection</th><td>keep-alive</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Content-Encoding</th><td>gzip</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Content-Type</th><td>application/json</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Date</th><td>Tue, 14 Nov 2017 23:27:44 GMT</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Server</th><td>Cpub</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Transfer-Encoding</th><td>chunked</td></tr>
+                                    
+                                    
+                                    
+                                    <tr><td class="response-text-sample" colspan="2">
+                                        <pre><code>{
+    "__v": 0,
+    "updatedAt": "2017-11-14T23:27:44.461Z",
+    "createdAt": "2017-11-14T23:27:44.461Z",
+    "imagePath": "/var/images/5a0b7bf0c11f730001d0872a.qcow2",
+    "name": "CSGO First Test",
+    "type": "BASE",
+    "imageSize": "20G",
+    "versionStatus": "TEST",
+    "version": "0.0.1",
+    "uniqueName": "csgo-test",
+    "containerId": "",
+    "status": "IDLE",
+    "_id": "5a0b7bf0c11f730001d0872a",
+    "imageList": []
+}</code></pre>
+                                    </td></tr>
+                                    
+                                    
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+
+                    <hr>
+                </div>
+                
+                
+                <div class="request">
+
+                    <h3 id="request-mount-image-to-directory">
+                        Mount Image to directory
+                        <a href="#request-mount-image-to-directory"><i class="glyphicon glyphicon-link"></i></a>
+                    </h3>
+
+                    <div></div>
+
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#request-mount-image-to-directory-example-curl" data-toggle="tab">Curl</a></li>
+                            <li role="presentation"><a href="#request-mount-image-to-directory-example-http" data-toggle="tab">HTTP</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="request-mount-image-to-directory-example-curl">
+                                <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+	"status":"MOUNTED",
+	"options":{
+		"config":[
+            "@ShutdownOnFailedCommand 0",
+            "@NoPromptForPassword 1",
+            "login anonymous",
+            "force_install_dir /var/app/csgo",
+            "app_update 740 validate",
+            "quit"
+        ],
+        "mountPath":"/var/app/csgo"
+	}
+}' "http://localhost:8002/images/5a10d3d0de730b0001d6e2ed/modify"</code></pre>
+                            </div>
+                            <div class="tab-pane" id="request-mount-image-to-directory-example-http">
+                                <pre><code class="hljs http">POST /images/5a10d3d0de730b0001d6e2ed/modify HTTP/1.1
+Host: localhost:8002
+Content-Type: application/json
+
+{
+	"status":"MOUNTED",
+	"options":{
+		"config":[
+            "@ShutdownOnFailedCommand 0",
+            "@NoPromptForPassword 1",
+            "login anonymous",
+            "force_install_dir /var/app/csgo",
+            "app_update 740 validate",
+            "quit"
+        ],
+        "mountPath":"/var/app/csgo"
+	}
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            
+                            <li role="presentation" class="active">
+                                <a href="#request-mount-image-to-directory-responses-f0c6f346-483a-fed3-687d-da319af04d19" data-toggle="tab">
+                                    
+                                    Response
+                                    
+                                </a>
+                            </li>
+                            
+                        </ul>
+                        <div class="tab-content">
+                            
+                            <div class="tab-pane active" id="request-mount-image-to-directory-responses-f0c6f346-483a-fed3-687d-da319af04d19">
+                                <table class="table table-bordered">
+                                    <tr><th style="width: 20%;">Status</th><td>200 </td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Connection</th><td>keep-alive</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Content-Encoding</th><td>gzip</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Content-Type</th><td>application/json</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Date</th><td>Sun, 19 Nov 2017 02:24:36 GMT</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Server</th><td>Cpub</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Transfer-Encoding</th><td>chunked</td></tr>
+                                    
+                                    
+                                    
+                                    <tr><td class="response-text-sample" colspan="2">
+                                        <pre><code>{
+    "_id": "5a10d3d0de730b0001d6e2ed",
+    "updatedAt": "2017-11-19T01:23:32.724Z",
+    "createdAt": "2017-11-19T00:44:00.174Z",
+    "imagePath": "/var/images/5a10d3d0de730b0001d6e2ed.qcow2",
+    "name": "CSGO First Test",
+    "type": "BASE",
+    "imageSize": "20G",
+    "versionStatus": "TEST",
+    "version": "0.0.1",
+    "uniqueName": "csgo-test",
+    "containerId": "",
+    "status": "IDLE",
+    "imageList": [],
+    "__v": 0
+}</code></pre>
+                                    </td></tr>
+                                    
+                                    
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+
+                    <hr>
+                </div>
+                
+                
+                <div class="request">
+
+                    <h3 id="request-steamcmd-image-creation">
+                        Steamcmd Image Creation
+                        <a href="#request-steamcmd-image-creation"><i class="glyphicon glyphicon-link"></i></a>
+                    </h3>
+
+                    <div></div>
+
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#request-steamcmd-image-creation-example-curl" data-toggle="tab">Curl</a></li>
+                            <li role="presentation"><a href="#request-steamcmd-image-creation-example-http" data-toggle="tab">HTTP</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="request-steamcmd-image-creation-example-curl">
+                                <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+	"status":"STEAMCMD",
+	"options":{
+		"config":[
+            "@ShutdownOnFailedCommand 0",
+            "@NoPromptForPassword 1",
+            "login anonymous",
+            "force_install_dir /var/app/csgo",
+            "app_update 740 validate",
+            "quit"
+        ],
+        "installDir":"/var/app/csgo"
+	}
+}' "http://localhost:8002/images/599d0a1bb31dd80001c79df7/modify"</code></pre>
+                            </div>
+                            <div class="tab-pane" id="request-steamcmd-image-creation-example-http">
+                                <pre><code class="hljs http">POST /images/599d0a1bb31dd80001c79df7/modify HTTP/1.1
+Host: localhost:8002
+Content-Type: application/json
+
+{
+	"status":"STEAMCMD",
+	"options":{
+		"config":[
+            "@ShutdownOnFailedCommand 0",
+            "@NoPromptForPassword 1",
+            "login anonymous",
+            "force_install_dir /var/app/csgo",
+            "app_update 740 validate",
+            "quit"
+        ],
+        "installDir":"/var/app/csgo"
+	}
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            
+                            <li role="presentation" class="active">
+                                <a href="#request-steamcmd-image-creation-responses-d4329e12-9344-839c-8846-52268c8219e8" data-toggle="tab">
+                                    
+                                    Response
+                                    
+                                </a>
+                            </li>
+                            
+                        </ul>
+                        <div class="tab-content">
+                            
+                            <div class="tab-pane active" id="request-steamcmd-image-creation-responses-d4329e12-9344-839c-8846-52268c8219e8">
+                                <table class="table table-bordered">
+                                    <tr><th style="width: 20%;">Status</th><td>200 </td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Connection</th><td>keep-alive</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Content-Encoding</th><td>gzip</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Content-Type</th><td>application/json</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Date</th><td>Wed, 15 Nov 2017 00:27:14 GMT</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Server</th><td>Cpub</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Transfer-Encoding</th><td>chunked</td></tr>
+                                    
+                                    
+                                    
+                                    <tr><td class="response-text-sample" colspan="2">
+                                        <pre><code>{
+    "_id": "5a0b7bf0c11f730001d0872a",
+    "updatedAt": "2017-11-15T00:11:49.268Z",
+    "createdAt": "2017-11-14T23:27:44.461Z",
+    "imagePath": "/var/images/5a0b7bf0c11f730001d0872a.qcow2",
+    "name": "CSGO First Test",
+    "type": "BASE",
+    "imageSize": "20G",
+    "versionStatus": "TEST",
+    "version": "0.0.1",
+    "uniqueName": "csgo-test",
+    "containerId": "",
+    "status": "IDLE",
+    "imageList": [],
+    "__v": 0
+}</code></pre>
+                                    </td></tr>
+                                    
+                                    
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+
+                    <hr>
+                </div>
+                
+                
+                <div class="request">
+
+                    <h3 id="request-create-container-image">
+                        Create Container Image
+                        <a href="#request-create-container-image"><i class="glyphicon glyphicon-link"></i></a>
+                    </h3>
+
+                    <div></div>
+
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#request-create-container-image-example-curl" data-toggle="tab">Curl</a></li>
+                            <li role="presentation"><a href="#request-create-container-image-example-http" data-toggle="tab">HTTP</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="request-create-container-image-example-curl">
+                                <pre><code class="hljs curl">curl -X POST -H "Content-Type: application/json" -d '{
+	"name":"CSGO First Test Container",
+	"type":"CONTAINER",
+	"imageSize":"20G",
+	"versionStatus":"TEST",
+	"version":"0.0.1",
+	"uniqueName":"csgo-test-container",
+	"imageList":[{
+		"_id": "599d0a1bb31dd80001c79df7",
+		"imagePath": "/var/images/599d0a1bb31dd80001c79df7.qcow2",
+		"version": "0.0.1",
+		"uniqueName": "csgo-test"
+	}]
+}' "http://localhost:8002/images"</code></pre>
+                            </div>
+                            <div class="tab-pane" id="request-create-container-image-example-http">
+                                <pre><code class="hljs http">POST /images HTTP/1.1
+Host: localhost:8002
+Content-Type: application/json
+
+{
+	"name":"CSGO First Test Container",
+	"type":"CONTAINER",
+	"imageSize":"20G",
+	"versionStatus":"TEST",
+	"version":"0.0.1",
+	"uniqueName":"csgo-test-container",
+	"imageList":[{
+		"_id": "599d0a1bb31dd80001c79df7",
+		"imagePath": "/var/images/599d0a1bb31dd80001c79df7.qcow2",
+		"version": "0.0.1",
+		"uniqueName": "csgo-test"
+	}]
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            
+                            <li role="presentation" class="active">
+                                <a href="#request-create-container-image-responses-f6e4e489-646f-93c9-6337-9a8d968e7c7f" data-toggle="tab">
+                                    
+                                    Response
+                                    
+                                </a>
+                            </li>
+                            
+                        </ul>
+                        <div class="tab-content">
+                            
+                            <div class="tab-pane active" id="request-create-container-image-responses-f6e4e489-646f-93c9-6337-9a8d968e7c7f">
+                                <table class="table table-bordered">
+                                    <tr><th style="width: 20%;">Status</th><td>201 </td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Connection</th><td>keep-alive</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Content-Encoding</th><td>gzip</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Content-Type</th><td>application/json</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Date</th><td>Wed, 15 Nov 2017 00:32:31 GMT</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Server</th><td>Cpub</td></tr>
+                                    
+                                    <tr><th style="width: 20%;">Transfer-Encoding</th><td>chunked</td></tr>
+                                    
+                                    
+                                    
+                                    <tr><td class="response-text-sample" colspan="2">
+                                        <pre><code>{
+    "__v": 0,
+    "updatedAt": "2017-11-15T00:32:31.470Z",
+    "createdAt": "2017-11-15T00:32:31.470Z",
+    "imagePath": "/var/images/5a0b8b1f33b7e90001ea9597.qcow2",
+    "name": "CSGO First Test Container",
+    "type": "CONTAINER",
+    "imageSize": "20G",
+    "versionStatus": "TEST",
+    "version": "0.0.1",
+    "uniqueName": "csgo-test-container",
+    "containerId": "",
+    "status": "IDLE",
+    "_id": "5a0b8b1f33b7e90001ea9597",
+    "imageList": [
+        {
+            "_id": "5a0b7bf0c11f730001d0872a",
+            "imagePath": "/var/images/5a0b7bf0c11f730001d0872a.qcow2",
+            "version": "0.0.1",
+            "uniqueName": "csgo-test"
+        }
+    ]
+}</code></pre>
+                                    </td></tr>
+                                    
+                                    
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+
+                    <hr>
+                </div>
+                
+
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("table:not(.table)").addClass('table table-bordered');
+    });
+</script>
+</body>
+</html>
