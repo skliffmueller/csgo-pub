@@ -81,15 +81,8 @@ ENV IMAGE_ROOT /var/images
 
 RUN mkdir $IMAGE_ROOT
 RUN mkdir $HOME
-RUN mkdir $HOME/csgo
 
 RUN ln -s /usr/games/steamcmd $HOME/steamcmd
-
-RUN mkdir /mnt/nbd0
-RUN mkdir /mnt/nbd1
-RUN mkdir /mnt/nbd2
-
-RUN chown -R ftpuser:ftpgroup /mnt
 
 WORKDIR $HOME
 
@@ -100,11 +93,4 @@ COPY . .
 VOLUME $IMAGE_ROOT
 VOLUME /lib/modules
 
-EXPOSE 40110-40210
-
-EXPOSE 27015
-EXPOSE 27015/udp
-EXPOSE 27020/udp
-EXPOSE 26900/udp
-
-CMD node server.js
+CMD ["node", "server.js"]

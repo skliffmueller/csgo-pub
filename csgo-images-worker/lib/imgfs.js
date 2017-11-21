@@ -78,6 +78,14 @@ function mountImage(devPath, imagePath, dirPath) {
 
 }
 
+function unmountAll() {
+    _usedDev.forEach((devPath) => {
+        _removeDev(devPath)
+        _umountDevice(devPath)
+            .then((stdout, stderr) => _qemuDisconnectImage(devPath))
+    })
+}
+
 function unmountImage(devPath) {
     _umountDevice(devPath)
         .then((stdout, stderr) => _qemuDisconnectImage(devPath))
@@ -104,6 +112,11 @@ function runSteamCmd(config, installDir) {
     let configPath = "/var/app/exec.txt"
     return writeFile(configPath, config)
         .then((stdout, stderr) => {
+            let devPath = _reserveDev() //"/dev/nbd0"
+            if(!devPath) {
+                return Promise.reject()
+            }
+            mountImage(devPath, imagePath, dirPath)
             return new Promise((resolve, reject) => {
                 let exec = `/var/app/steamcmd`
                 let args = [
@@ -153,6 +166,10 @@ let _availableDev = [
     
 ]
 let _usedDev = []
+
+function _getDirPath(devPath) {
+    return '/dev/nbd0'.replace('/dev', '/var/mnt')
+}
 
 function _reserveDev() {
     let filteredDev = _availableDev.filter((a) => {
@@ -249,5 +266,6 @@ module.exports = {
     unmountImage,
     pullGithub,
     copy,
-    runSteamCmd
+    runSteamCmd,
+    unmountAll
 }
