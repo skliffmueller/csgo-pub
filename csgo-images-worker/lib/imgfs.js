@@ -14,8 +14,7 @@ function createEmptyImage(imagePath, size) {
             .then((stdout, stderr) => _mkfsExt4(dev.devPath))
             .then((stdout, stderr) => _qemuDisconnectImage(dev.devPath))
             .then((stdout, stderr) => {
-                _removeDev(dev.devPath)
-                return Promise.resolve()
+                return Promise.resolve(_removeDev(dev.devPath))
             })
             .catch((e) => {
                 _removeDev(dev.devPath)
@@ -30,7 +29,7 @@ function mergeImages(newImagePath, images) {
                         let mergeDev;
                         mountImage(imagePath)
                             .then(d => {
-                                mergeDev = d[0]
+                                mergeDev = d
                                 return copy(mergeDev.dirPath, dev.dirPath)
                             })
                             .then((stdout, stderr) => unmountImage(mergeDev.devPath))
@@ -131,14 +130,18 @@ function mountImage(imagePath) {
 
     return _qemuConnectImage(dev.devPath, dev.imagePath)
                 .then((stdout, stderr) => _mountDevice(dev.devPath, dev.dirPath))
-                .then((stdout, stderr) => Promise.resolve(dev))
+                .then((stdout, stderr) => {
+                    return Promise.resolve(dev)
+                })
 
 }
 
 function unmountImage(devPath) {
     _umountDevice(devPath)
         .then((stdout, stderr) => _qemuDisconnectImage(devPath))
-        .then((stdout, stderr) => Promise.resolve(_removeDev(devPath)))
+        .then((stdout, stderr) => {
+            return Promise.resolve(_removeDev(devPath))
+        })
 }
 
 function pullGithub() {
@@ -289,5 +292,5 @@ module.exports = {
     pullGithub,
     copy,
     //runSteamCmd,
-    unmountAll
+    //unmountAll
 }
