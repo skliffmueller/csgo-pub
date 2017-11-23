@@ -9,14 +9,9 @@ services:
     build: .
     working_dir: /var/app
     command: node server.js
-    ports:
-     - "40110-40210:40110-40210"
-     - "27015:27015"
-     - "27015:27015/udp"
-     - "27020:27020/udp"
-     - "26900:26900/udp"
     volumes:
      - f:/images:/var/images
+     - f:/mnt:/mnt
     networks:
       - default
       - csgonet

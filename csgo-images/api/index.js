@@ -14,6 +14,8 @@ function mount(server) {
     // This will modify an existing image, use caution on base images
     server.post({ path: '/images/:id/modify', version: '1.0.0' }, controller.modify)
 
+    server.post({ path: '/images/:id/mount', version: '1.0.0' }, controller.mountImage)
+    server.post({ path: '/images/:id/unmount', version: '1.0.0' }, controller.unmountImage)
     // In case of ftp server attachment or basic mount
     // use this path to trigger when you are finished so we may close the image
     server.post({ path: '/images/:id/done', version: '1.0.0' }, controller.done)

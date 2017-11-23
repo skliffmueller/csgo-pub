@@ -10,7 +10,7 @@ services:
      - "27020:27020/udp"
      - "26900:26900/udp"
     volumes:
-     - f:/test:/var/app/server
+     - f:/mnt/nbd0:/var/app/server
     networks:
       - default
       - csgonet

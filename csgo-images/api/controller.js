@@ -106,6 +106,43 @@ function modify(req, res, next) {
         })
 }
 
+
+function mountImage(req, res, next) {
+    Images.findOne({
+            _id:req.params.id
+        })
+        .lean()
+        .exec()
+        .then((image) => {
+            if(!image) {
+                return Promise.reject({code:404,message:"Image not found"});
+            }
+            nats.publish('image::mount', image._id.toString())
+            res.json(200, image)
+        })
+        .catch((err) => {
+            res.json(err.code || 400, err)
+        })
+}
+
+function unmountImage(req, res, next) {
+    Images.findOne({
+            _id:req.params.id
+        })
+        .lean()
+        .exec()
+        .then((image) => {
+            if(!image) {
+                return Promise.reject({code:404,message:"Image not found"});
+            }
+            nats.publish('image::unmount', image._id.toString())
+            res.json(200, image)
+        })
+        .catch((err) => {
+            res.json(err.code || 400, err)
+        })
+}
+
 function done(req, res, next) {
     Images.findOne({
         _id:req.params.id
@@ -130,5 +167,7 @@ module.exports = {
   show,
   details,
   modify,
-  done
+  done,
+  mountImage,
+  unmountImage
 }

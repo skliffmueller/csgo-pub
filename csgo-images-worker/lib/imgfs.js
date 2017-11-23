@@ -86,7 +86,7 @@ let _devList = [
 ]
 
 function _getDirPath(devPath) {
-    return devPath.replace('/dev', '/var/mnt')
+    return devPath.replace('/dev', '/mnt')
 }
 
 function _reserveDev(imagePath) {

@@ -84,43 +84,35 @@ nats.subscribe('image::create', { 'queue': 'image.worker' }, message => {
 })
 
 nats.subscribe('image::mount', { 'queue': 'image.worker' }, message => {
-    let body = JSON.parse(message)
     Images.findOne({
-          _id:body._id
-        })
-        .then((image) => {
-            let action = ""
-            if(image.status!=='IDLE') {
-              // Handle error some how ?
-              return;
-            }
-            body.image = image
-            queueServer.push([{
-                controller:'image',
-                action:'mountImage',
-                data:body
-            }], (err) => {
-                console.log(err)
-            })
-        })
-  })
-
-nats.subscribe('image::unmount', { 'queue': 'image.worker' }, message => {
-let body = JSON.parse(message)
-Images.findOne({
-        _id:body._id
+        _id:message
     })
     .then((image) => {
-        let action = ""
-        if(image.status!=='IDLE') {
-            // Handle error some how ?
+        if(!image) {
             return;
         }
-        body.image = image
+        queueServer.push([{
+            controller:'image',
+            action:'mountImage',
+            data:image
+        }], (err) => {
+            console.log(err)
+        })
+    })
+})
+
+nats.subscribe('image::unmount', { 'queue': 'image.worker' }, message => {
+    Images.findOne({
+        _id:message
+    })
+    .then((image) => {
+        if(!image) {
+            return;
+        }
         queueServer.push([{
             controller:'image',
             action:'unmountImage',
-            data:body
+            data:image
         }], (err) => {
             console.log(err)
         })

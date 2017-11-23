@@ -229,7 +229,7 @@ controller.createContainer = (data, q, callback) => {
             let notBody = JSON.stringify({
                 id: actionId, // Some generated
                 state:'error', // loading, warning, error, success
-                message:`Image '${image.name}' creation error`,
+                message:`Image '${newImage.name}' creation error`,
                 error:err
             })
             nats.publish('socket::notifications', notBody)
@@ -320,7 +320,7 @@ controller.github = (data, q, callback) => {
 
 controller.mount = (data, q, callback) => {
     let actionId = lastActionId++;
-    let image = data.image;
+    let image = data;
     let dev;
 
     // socket announce 'notification',
@@ -375,7 +375,7 @@ controller.mount = (data, q, callback) => {
 
 controller.unmount = (data, q, callback) => {
     let actionId = lastActionId++;
-    let image = data.image;
+    let image = data;
     let dev;
 
     // socket announce 'notification',
