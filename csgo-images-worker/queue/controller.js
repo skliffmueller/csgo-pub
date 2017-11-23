@@ -238,251 +238,108 @@ controller.createContainer = (data, q, callback) => {
         })
 }
 
-controller.steam = (data, q, callback) => {
-    let actionId = lastActionId++;
-    let image = data.image;
-    let options = data.options;
+// controller.steam = (data, q, callback) => {
+//     let actionId = lastActionId++;
+//     let image = data.image;
+//     let options = data.options;
 
 
-    Images.update({
-            _id:{
-                $in:image._id
-            }
-        },{
-            $set:{
-                status:'STEAMCMD'
-            }
-        })
-        .then((data) => {
-            // socket announce 'image', '_id', {status:'MOUNTED'}
-            let imageBody = JSON.stringify({
-                _id:image._id,
-                status:'STEAMCMD'
-            })
-            nats.publish('socket::images', imageBody)
-            // socket announce 'notification',
-            let notBody = JSON.stringify({
-                id: actionId, // Some generated
-                state:'loading', // loading, warning, error, success
-                message:`Image '${image.name}' is being updated with steamcmd`
-            })
-            nats.publish('socket::notifications', notBody)
+//     Images.update({
+//             _id:{
+//                 $in:image._id
+//             }
+//         },{
+//             $set:{
+//                 status:'STEAMCMD'
+//             }
+//         })
+//         .then((data) => {
 
-            return imgfs.mountImage("/dev/nbd0", image.imagePath, options.installDir)
-        })
-        .then((stdout, stderr) => {
-            return imgfs.runSteamCmd(options.config, options.installDir)
-        })
-        .then((stdout, stderr) => {
-            console.log('whats up steam', stdout, stderr)
-            return imgfs.unmountImage("/dev/nbd0")
-        })
-        .then((stdout, stderr) => {
-            return Images.update({
-                _id:image._id
-            },{
-                $set:{
-                    status:'IDLE'
-                }
-            })
-        })
-        .then((data) => {
-            // socket announce 'image', '_id', {status:'MOUNTED'}
-            let imageBody = JSON.stringify({
-                _id:image._id,
-                status:'IDLE'
-            })
-            nats.publish('socket::images', imageBody)
-            // socket announce 'notification',
-            let notBody = JSON.stringify({
-                id: actionId, // Some generated
-                state:'success', // loading, warning, error, success
-                message:`Image '${image.name}' update complete`
-            })
-            nats.publish('socket::notifications', notBody)
 
-            callback()
-        })
-        .catch((err) => {
-            // socket announce 'notification',
-            let notBody = JSON.stringify({
-                id: actionId, // Some generated
-                state:'error', // loading, warning, error, success
-                message:`Image '${image.name}' steamcmd error`,
-                error:err
-            })
-            nats.publish('socket::notifications', notBody)
+//             return imgfs.mountImage("/dev/nbd0", image.imagePath, options.installDir)
+//         })
+//         .then((stdout, stderr) => {
+//             // socket announce 'image', '_id', {status:'MOUNTED'}
+//             let imageBody = JSON.stringify({
+//                 _id:image._id,
+//                 status:'STEAMCMD'
+//             })
+//             nats.publish('socket::images', imageBody)
+//             // socket announce 'notification',
+//             let notBody = JSON.stringify({
+//                 id: actionId, // Some generated
+//                 state:'loading', // loading, warning, error, success
+//                 message:`Image '${image.name}' is being updated with steamcmd`
+//             })
+//             nats.publish('socket::notifications', notBody)
+//             return imgfs.runSteamCmd(image.imagePath, options.config)
+//         })
+//         .then((stdout, stderr) => {
+//             return Images.update({
+//                 _id:image._id
+//             },{
+//                 $set:{
+//                     status:'IDLE'
+//                 }
+//             })
+//         })
+//         .then((data) => {
+//             // socket announce 'image', '_id', {status:'MOUNTED'}
+//             let imageBody = JSON.stringify({
+//                 _id:image._id,
+//                 status:'IDLE'
+//             })
+//             nats.publish('socket::images', imageBody)
+//             // socket announce 'notification',
+//             let notBody = JSON.stringify({
+//                 id: actionId, // Some generated
+//                 state:'success', // loading, warning, error, success
+//                 message:`Image '${image.name}' update complete`
+//             })
+//             nats.publish('socket::notifications', notBody)
 
-            callback(err)
-        })
-}
+//             callback()
+//         })
+//         .catch((err) => {
+//             // socket announce 'notification',
+//             let notBody = JSON.stringify({
+//                 id: actionId, // Some generated
+//                 state:'error', // loading, warning, error, success
+//                 message:`Image '${image.name}' steamcmd error`,
+//                 error:err
+//             })
+//             nats.publish('socket::notifications', notBody)
+
+//             callback(err)
+//         })
+// }
 
 controller.github = (data, q, callback) => {
     let actionId = lastActionId++;
 }
 
-controller.ftpStart = (data, q, callback) => {
-    let actionId = lastActionId++
-    let image = data.image
-
-    Images.update({
-        _id:image._id
-    },{
-        $set:{
-            status:'FTP'
-        }
-    })
-    .then((data) => {
-        // socket announce 'image', '_id', {status:'MOUNTED'}
-        let imageBody = JSON.stringify({
-            _id:image._id,
-            status:'FTP'
-        })
-        nats.publish('socket::images', imageBody)
-        // socket announce 'notification',
-        let notBody = JSON.stringify({
-            id: actionId, // Some generated
-            state:'loading', // loading, warning, error, success
-            message:`Image '${image.name}' is loading ftp`
-        })
-        nats.publish('socket::notifications', notBody)
-
-        return  imgfs.startFtpWithImagePath(image.imagePath)
-    })
-    .then((ftpProcess) => {
-        // socket announce 'notification',
-        let notBody = JSON.stringify({
-            id: actionId, // Some generated
-            state:'success', // loading, warning, error, success
-            message:`Image '${image.name}' is an ftp server`
-        })
-        nats.publish('socket::notifications', notBody)
-        callback()
-    })
-    .catch(err => {
-        // socket announce 'notification',
-        let notBody = JSON.stringify({
-            id: actionId, // Some generated
-            state:'error', // loading, warning, error, success
-            message:`Image '${image.name}' ftp error`,
-            error:err
-        })
-        nats.publish('socket::notifications', notBody)
-        callback(err)
-    })  
-}
-
-controller.ftpStop = (data, q, callback) => {
-    let actionId = lastActionId++;
-    let image = data.image
-
-    imgfs.stopFtpWithImagePath()
-        .then((data) => {
-            return Images.update({
-                    _id:image._id
-                },{
-                    $set:{
-                        status:'IDLE'
-                    }
-                })
-        })
-        .then((data) => {
-            // socket announce 'image', '_id', {status:'MOUNTED'}
-            let imageBody = JSON.stringify({
-                _id:image._id,
-                status:'IDLE'
-            })
-            nats.publish('socket::images', imageBody)
-            // socket announce 'notification',
-            let notBody = JSON.stringify({
-                id: actionId, // Some generated
-                state:'success', // loading, warning, error, success
-                message:`Image '${image.name}' was detached from ftp`
-            })
-            nats.publish('socket::notifications', notBody)
-
-            callback()
-        })
-        .catch(err => {
-            // socket announce 'notification',
-            let notBody = JSON.stringify({
-                id: actionId, // Some generated
-                state:'error', // loading, warning, error, success
-                message:`Image '${image.name}' ftp error`,
-                error:err
-            })
-            nats.publish('socket::notifications', notBody)
-            callback(err)
-        }) 
-}
-
-controller.mountStart = (data, q, callback) => {
+controller.mount = (data, q, callback) => {
     let actionId = lastActionId++;
     let image = data.image;
+    let dev;
 
-    let devPath = "/dev/nbd0"
-    let dirPath = "/mnt/nbd0"
-
-    Images.update({
-        _id:image._id
-    },{
-        $set:{
-            status:'MOUNTED'
-        }
+    // socket announce 'notification',
+    let notBody = JSON.stringify({
+        id: actionId, // Some generated
+        state:'loading', // loading, warning, error, success
+        message:`Image '${image.name}' is loading mount point`
     })
-    .then((data) => {
-        // socket announce 'image', '_id', {status:'MOUNTED'}
-        let imageBody = JSON.stringify({
-            _id:image._id,
-            status:'MOUNTED'
-        })
-        nats.publish('socket::images', imageBody)
-        // socket announce 'notification',
-        let notBody = JSON.stringify({
-            id: actionId, // Some generated
-            state:'loading', // loading, warning, error, success
-            message:`Image '${image.name}' is loading mount point`
-        })
-        nats.publish('socket::notifications', notBody)
+    nats.publish('socket::notifications', notBody)
 
-        return imgfs.mountImage(devPath, image.imagePath, dirPath)
-    })
-    .then((ftpProcess) => {
-        // socket announce 'notification',
-        let notBody = JSON.stringify({
-            id: actionId, // Some generated
-            state:'success', // loading, warning, error, success
-            message:`Image '${image.name}' is now mounted`
-        })
-        nats.publish('socket::notifications', notBody)
-        callback()
-    })
-    .catch(err => {
-        // socket announce 'notification',
-        let notBody = JSON.stringify({
-            id: actionId, // Some generated
-            state:'error', // loading, warning, error, success
-            message:`Image '${image.name}' mount error`,
-            error:err
-        })
-        nats.publish('socket::notifications', notBody)
-        callback(err)
-    }) 
-}
-
-controller.mountStop = (data, q, callback) => {
-    let actionId = lastActionId++;
-    let image = data.image
-
-    let devPath = "/dev/nbd0"
-
-    imgfs.unmountImage(devPath)
-        .then((data) => {
+    imgfs.mountImage(image.imagePath)
+        .then(d => {
+            dev = d
             return Images.update({
                     _id:image._id
                 },{
                     $set:{
-                        status:'IDLE'
+                        status:'MOUNTED',
+                        dev:dev
                     }
                 })
         })
@@ -490,17 +347,17 @@ controller.mountStop = (data, q, callback) => {
             // socket announce 'image', '_id', {status:'MOUNTED'}
             let imageBody = JSON.stringify({
                 _id:image._id,
-                status:'IDLE'
+                status:'MOUNTED',
+                dev:dev
             })
             nats.publish('socket::images', imageBody)
-            // socket announce 'notification',
+
             let notBody = JSON.stringify({
                 id: actionId, // Some generated
                 state:'success', // loading, warning, error, success
-                message:`Image '${image.name}' was detached from mount`
+                message:`Image '${image.name}' is now mounted`
             })
             nats.publish('socket::notifications', notBody)
-
             callback()
         })
         .catch(err => {
@@ -514,6 +371,61 @@ controller.mountStop = (data, q, callback) => {
             nats.publish('socket::notifications', notBody)
             callback(err)
         }) 
+}
+
+controller.unmount = (data, q, callback) => {
+    let actionId = lastActionId++;
+    let image = data.image;
+    let dev;
+
+    // socket announce 'notification',
+    let notBody = JSON.stringify({
+        id: actionId, // Some generated
+        state:'loading', // loading, warning, error, success
+        message:`Image '${image.name}' is being unmounted from filesystem`
+    })
+    nats.publish('socket::notifications', notBody)
+
+    imgfs.unmountImage(image.dev.devPath)
+        .then(d => {
+            dev = d
+            return Images.update({
+                    _id:image._id
+                },{
+                    $set:{
+                        status:'IDLE',
+                        dev:dev
+                    }
+                })
+        })
+        .then((data) => {
+            // socket announce 'image', '_id', {status:'MOUNTED'}
+            let imageBody = JSON.stringify({
+                _id:image._id,
+                status:'IDLE',
+                dev:dev
+            })
+            nats.publish('socket::images', imageBody)
+
+            let notBody = JSON.stringify({
+                id: actionId, // Some generated
+                state:'success', // loading, warning, error, success
+                message:`Image '${image.name}' is now unmounted`
+            })
+            nats.publish('socket::notifications', notBody)
+            callback()
+        })
+        .catch(err => {
+            // socket announce 'notification',
+            let notBody = JSON.stringify({
+                id: actionId, // Some generated
+                state:'error', // loading, warning, error, success
+                message:`Image '${image.name}' unmount error`,
+                error:err
+            })
+            nats.publish('socket::notifications', notBody)
+            callback(err)
+        })
 }
 
 module.exports = controller;

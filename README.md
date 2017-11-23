@@ -9,7 +9,9 @@ Storage space is costly, and server management isn't scaleable by hiring more se
 
 [Servers API Documentation](./CSGO-Servers-API-Doc.html)
 
-These are generated based on the Postman export. More details need to be itterated about what each field means.
+These are generated based on a Postman export. They are html, so if you are viewing this on a repository, you will have to download the files and view them locally.
+
+More details need to be itterated about what each field means.
 Socket.io has been freehanded, and has not been tested fully or debugged. Documentation will come soon after thorough testing.
 
 [TODO](./TODO.md)

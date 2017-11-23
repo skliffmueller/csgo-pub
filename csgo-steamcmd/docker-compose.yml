@@ -1,9 +1,9 @@
 version: '2'
 services:
-  csgo-srcds:
+  csgo-steamcmd:
     build: .
     working_dir: /var/app
-    command: ["/var/app/server/srcds_run", "-game csgo", "-console", "-usercon", "+game_type 0", "+game_mode 1", "+map de_dust2", "+ip 0.0.0.0"]
+    command: ["+login anonymous", "+force_install_dir /var/app/server", "+app_update 740 validate", "quit"]
     ports:
      - "27015:27015"
      - "27015:27015/udp"
@@ -14,10 +14,11 @@ services:
     networks:
       - default
       - csgonet
-    logging:
-      driver: redis-log-driver
-      options:
-        redis-address: redis-csgonet:6379
+    privileged: true
+    cap_add:
+      - ALL
+    security_opt:
+      - seccomp:unconfined
 networks:
   csgonet:
     external: true

@@ -83,46 +83,90 @@ nats.subscribe('image::create', { 'queue': 'image.worker' }, message => {
         })
 })
 
-nats.subscribe('image::modify', { 'queue': 'image.worker' }, message => {
-  let body = JSON.parse(message)
-  Images.findOne({
+nats.subscribe('image::mount', { 'queue': 'image.worker' }, message => {
+    let body = JSON.parse(message)
+    Images.findOne({
+          _id:body._id
+        })
+        .then((image) => {
+            let action = ""
+            if(image.status!=='IDLE') {
+              // Handle error some how ?
+              return;
+            }
+            body.image = image
+            queueServer.push([{
+                controller:'image',
+                action:'mountImage',
+                data:body
+            }], (err) => {
+                console.log(err)
+            })
+        })
+  })
+
+nats.subscribe('image::unmount', { 'queue': 'image.worker' }, message => {
+let body = JSON.parse(message)
+Images.findOne({
         _id:body._id
-      })
-      .then((image) => {
-          let action = ""
-          if(image.status!=='IDLE') {
+    })
+    .then((image) => {
+        let action = ""
+        if(image.status!=='IDLE') {
             // Handle error some how ?
             return;
-          }
-          switch(body.status) {
-              case 'FTP':
-                  action = 'ftpImageStart'
-                  break;
-              case 'STEAMCMD':
-                  action = 'steamCmdImage'
-                  break;
-              case 'GITHUB':
-                  action = 'githubImage'
-                  break;
-              case 'MOUNTED':
-                  action = 'mountImageStart'
-                  break;
-          }
-          if(!action) {
-              return;
-          }
-          body.image = image
-          queueServer.push([{
-              controller:'image',
-              action:action,
-              data:body
-          }], (err) => {
-              console.log(err)
-          })
-      })
+        }
+        body.image = image
+        queueServer.push([{
+            controller:'image',
+            action:'unmountImage',
+            data:body
+        }], (err) => {
+            console.log(err)
+        })
+    })
 })
 
-nats.subscribe('image::done', { 'queue': 'image.worker' }, message => {
+//   nats.subscribe('image::modify', { 'queue': 'image.worker' }, message => {
+//     let body = JSON.parse(message)
+//     Images.findOne({
+//           _id:body._id
+//         })
+//         .then((image) => {
+//             let action = ""
+//             if(image.status!=='IDLE') {
+//               // Handle error some how ?
+//               return;
+//             }
+//             switch(body.status) {
+//                 case 'FTP':
+//                     action = 'ftpImageStart'
+//                     break;
+//                 case 'STEAMCMD':
+//                     action = 'steamCmdImage'
+//                     break;
+//                 case 'GITHUB':
+//                     action = 'githubImage'
+//                     break;
+//                 case 'MOUNTED':
+//                     action = 'mountImageStart'
+//                     break;
+//             }
+//             if(!action) {
+//                 return;
+//             }
+//             body.image = image
+//             queueServer.push([{
+//                 controller:'image',
+//                 action:action,
+//                 data:body
+//             }], (err) => {
+//                 console.log(err)
+//             })
+//         })
+//   })
+
+/*nats.subscribe('image::done', { 'queue': 'image.worker' }, message => {
   Images.findOne({
         _id:message
       })
@@ -148,7 +192,7 @@ nats.subscribe('image::done', { 'queue': 'image.worker' }, message => {
               console.log(err)
           })
       })
-})
+})*/
 
 nats.subscribe('socket::notifications', { 'queue': 'image.worker' }, message => {
   console.log(message)

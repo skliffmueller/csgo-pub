@@ -41,7 +41,12 @@ let s = new Schema(
         version:String,
         uniqueName:String
     }],
-    status:{ type:String, enum:['MOUNTED','FTP','STEAMCMD','GITHUB','CONTAINER','IDLE']}
+    status:{ type:String, enum:['MOUNTED','FTP','STEAMCMD','GITHUB','CONTAINER','IDLE']},
+    dev:{
+        dirPath:String,
+        imagePath:String,
+        devPath:String
+    }
   },
   {
     id: false,

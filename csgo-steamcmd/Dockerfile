@@ -26,4 +26,4 @@ RUN ln -s /usr/games/steamcmd $HOME/steamcmd
 WORKDIR $HOME
 VOLUME $HOME/server
 
-ENTRYPOINT ["/bin/sh"]
+ENTRYPOINT ["./steamcmd"]

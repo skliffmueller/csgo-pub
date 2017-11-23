@@ -5,45 +5,36 @@ const exec = util.promisify(require('child_process').exec)
 const spawn = require('child_process').spawn
 
 function createEmptyImage(imagePath, size) {
-    let devPath = _reserveDev() //"/dev/nbd0"
-    if(!devPath) {
+    let dev = _reserveDev(imagePath) //"/dev/nbd0"
+    if(!dev) {
         return Promise.reject()
     }
-    return _qemuCreateImage(imagePath, size)
-            .then((stdout, stderr) => _qemuConnectImage(devPath, imagePath))
-            .then((stdout, stderr) => _mkfsExt4(devPath))
-            .then((stdout, stderr) => _qemuDisconnectImage(devPath))
+    return _qemuCreateImage(dev.imagePath, size)
+            .then((stdout, stderr) => _qemuConnectImage(dev.devPath, dev.imagePath))
+            .then((stdout, stderr) => _mkfsExt4(dev.devPath))
+            .then((stdout, stderr) => _qemuDisconnectImage(dev.devPath))
             .then((stdout, stderr) => {
-                _removeDev(devPath)
+                _removeDev(dev.devPath)
                 return Promise.resolve()
             })
             .catch((e) => {
-                _removeDev(devPath)
+                _removeDev(dev.devPath)
             })
 }
 
 function mergeImages(newImagePath, images) {
-    let newImageDev = _reserveDev() //"/dev/nbd0"
-    let newImageDir = "/mnt/nbd0"
-    let mergeImageDev = _reserveDev()
-    let mergeImageDir = "/mnt/nbd1"
-
-    if(!newImageDev || !mergeImageDev) {
-        _removeDev(newImageDev)
-        _removeDev(mergeImageDev)
-        return Promise.reject()
-    }
-
-    return mountImage(newImageDev, newImagePath, newImageDir)
-            .then((stdout, stderr) => {
+    return mountImage(newImagePath)
+            .then((dev) => {
                 return new Promise((resolve, reject) => {
-
                     asyc.eachSeries(images, (imagePath, cb) => {
-
-                        mountImage(mergeImageDev, imagePath, mergeImageDir)
-                            .then((stdout, stderr) => copy(mergeImageDir, newImageDir))
-                            .then((stdout, stderr) => unmountImage(mergeImageDev))
-                            .then((stdout, stderr) => {
+                        let mergeDev;
+                        mountImage(imagePath)
+                            .then(d => {
+                                mergeDev = d[0]
+                                return copy(mergeDev.dirPath, dev.dirPath)
+                            })
+                            .then((stdout, stderr) => unmountImage(mergeDev.devPath))
+                            .then(d => {
                                 cb()
                             })
                             .catch(error => {
@@ -51,18 +42,13 @@ function mergeImages(newImagePath, images) {
                             })
 
                     }, (err) => {
-
-                        unmountImage(newImageDev).then((stdout, stderr) => {
-                            _removeDev(newImageDev)
-                            _removeDev(mergeImageDev)
+                        unmountImage(dev.devPath).then(dev => {
                             if(err)
                                 reject(err)
                             else
                                 resolve()
                         })
-
                     })
-
                 })
             })
 
@@ -72,80 +58,14 @@ function createContainerImage(originalImagePath, containerImagePath) {
     return _qemuCreateContainerImage(originalImagePath, containerImagePath)
 }
 
-function mountImage(devPath, imagePath, dirPath) {
-    return _qemuConnectImage(devPath, imagePath)
-                .then((stdout, stderr) => _mountDevice(devPath, dirPath))
+/*
+    imagePath:"",
+    devPath:"",
+    dirPath:""
+*/
+let _devices = [];
 
-}
-
-function unmountAll() {
-    _usedDev.forEach((devPath) => {
-        _removeDev(devPath)
-        _umountDevice(devPath)
-            .then((stdout, stderr) => _qemuDisconnectImage(devPath))
-    })
-}
-
-function unmountImage(devPath) {
-    _umountDevice(devPath)
-        .then((stdout, stderr) => _qemuDisconnectImage(devPath))
-}
-
-function pullGithub() {
-
-}
-
-
-function copy(fromPath, toPath) {
-    // cp -rf $fromPath $toPath
-    return exec(`cp -rf ${fromPath} ${toPath}`)
-}
-
-
-function runSteamCmd(config, installDir) {
-    if(!config) {
-        config = ""
-    }
-    if(Array.isArray(config)) {
-        config = config.join('\n')
-    }
-    let configPath = "/var/app/exec.txt"
-    return writeFile(configPath, config)
-        .then((stdout, stderr) => {
-            let devPath = _reserveDev() //"/dev/nbd0"
-            if(!devPath) {
-                return Promise.reject()
-            }
-            mountImage(devPath, imagePath, dirPath)
-            return new Promise((resolve, reject) => {
-                let exec = `/var/app/steamcmd`
-                let args = [
-                    "+runscript",
-                    configPath
-                ]
-                console.log('start', exec, args)
-                app = spawn(
-                    exec,
-                    args
-                )
-                app.on('error', (error) => {
-                    reject()
-                    console.log('child process error', error)
-                })
-                app.stdout.setEncoding('utf8')
-                // app.stdout.on('data', data => sendLog(data))
-                app.stdout.on('data', data => console.log(data))
-                // app.stderr.on('data', data => sendLog(data));
-                app.on('close', (code) => {
-                    console.log(`child process exited with code ${code}`);
-                    resolve()
-                });
-            })
-
-        })
-}
-
-let _availableDev = [
+let _devList = [
     '/dev/nbd0',
     '/dev/nbd1',
     '/dev/nbd2',
@@ -165,34 +85,136 @@ let _availableDev = [
     '/dev/nbd16'
     
 ]
-let _usedDev = []
 
 function _getDirPath(devPath) {
-    return '/dev/nbd0'.replace('/dev', '/var/mnt')
+    return devPath.replace('/dev', '/var/mnt')
 }
 
-function _reserveDev() {
-    let filteredDev = _availableDev.filter((a) => {
+function _reserveDev(imagePath) {
+    let _usedDev = _devices.map((a) => a.devPath)
+
+    let filteredDev = _devList.filter((a) => {
         return _usedDev.indexOf(a) == -1
     })
     if(!filteredDev.length) {
         return false
     }
-    _usedDev.push(filteredDev[0])
-    return filteredDev[0]
+    let dev = {
+        devPath:filteredDev[0],
+        dirPath:_getDirPath(filteredDev[0]),
+        imagePath:imagePath
+    }
+    _devices.push(dev)
+    return dev
 }
 
-function _removeDev(dev) {
-    if(!dev) {
+function _removeDev(devPath) {
+    if(!devPath) {
         return false
     }
-    let i = _usedDev.indexOf(dev)
+    let _usedDev = _devices.map((a) => a.devPath)
+    let i = _usedDev.indexOf(devPath)
     if(i==-1) {
         return false
     }
+    let dev = _usedDev[i];
     _usedDev.splice(i, 1)
-    return true
+    return dev
 }
+
+function mountImage(imagePath) {
+    let dev = _reserveDev(imagePath)
+
+    if(!dev) {
+        return Promise.reject()
+    }
+
+    return _qemuConnectImage(dev.devPath, dev.imagePath)
+                .then((stdout, stderr) => _mountDevice(dev.devPath, dev.dirPath))
+                .then((stdout, stderr) => Promise.resolve(dev))
+
+}
+
+function unmountImage(devPath) {
+    _umountDevice(devPath)
+        .then((stdout, stderr) => _qemuDisconnectImage(devPath))
+        .then((stdout, stderr) => Promise.resolve(_removeDev(devPath)))
+}
+
+function pullGithub() {
+
+}
+
+
+function copy(fromPath, toPath) {
+    // cp -rf $fromPath $toPath
+    return exec(`cp -rf ${fromPath} ${toPath}`)
+}
+
+
+// function runSteamCmd(imagePath, config) {
+//     if(!config) {
+//         config = ""
+//     }
+//     let devPath = _reserveDev() //"/dev/nbd0"
+//     let dirPath = _getDirPath(devPath);
+//     if(!devPath) {
+//         return Promise.reject()
+//     }
+//     if(Array.isArray(config)) {
+//         config = _steamCmdReplace(config, {
+//             dirPath: dirPath
+//         })
+//         config = config.join('\n')
+//     }
+//     let configPath = "/var/app/exec.txt"
+//     return writeFile(configPath, config)
+//         .then((stdout, stderr) => {
+//             return mountImage(devPath, imagePath, dirPath)
+//         })
+//         .then((stdout, stderr) => {
+//             return new Promise((resolve, reject) => {
+//                 let exec = `/var/app/steamcmd`
+//                 let args = [
+//                     "+runscript",
+//                     configPath
+//                 ]
+//                 console.log('start', exec, args)
+//                 app = spawn(
+//                     exec,
+//                     args
+//                 )
+//                 app.on('error', (error) => {
+//                     reject()
+//                     console.log('child process error', error)
+//                 })
+//                 app.stdout.setEncoding('utf8')
+//                 // app.stdout.on('data', data => sendLog(data))
+//                 app.stdout.on('data', data => console.log(data))
+//                 // app.stderr.on('data', data => sendLog(data));
+//                 app.on('close', (code) => {
+//                     console.log(`child process exited with code ${code}`);
+//                     resolve()
+//                 });
+//             })
+
+//         })
+//         .then(() => {
+//             return unmountImage(devPath)
+//         })
+// }
+
+// function _steamCmdReplace(config, args) {
+//     config.map((line) => {
+//         for(let key in args) {
+//             line.replace(`\$\{key\}`, args[key])
+//         }
+//         return line
+//     })
+//     return config
+// }
+
+
 
 
 function _chownUser(user, path) {
@@ -266,6 +288,6 @@ module.exports = {
     unmountImage,
     pullGithub,
     copy,
-    runSteamCmd,
+    //runSteamCmd,
     unmountAll
 }
