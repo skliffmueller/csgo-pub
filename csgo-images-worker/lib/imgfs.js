@@ -290,7 +290,7 @@ module.exports = {
     mountImage,
     unmountImage,
     pullGithub,
-    copy,
+    copy
     //runSteamCmd,
     //unmountAll
 }
