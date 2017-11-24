@@ -121,29 +121,22 @@ controller.changeStateContainer = (data, q, callback) => {
         message:states[state].loading
     })
     nats.publish('socket::notifications', notBody)
-
     let docker = new Docker(server.daemon.config)
-    docker
-        .getContainer(server.container.Id)
-        .then(c => {
-            container = c
-            let action = ""
-            switch(body.status) {
-                case 'START':
-                    return container.start()
-                case 'PAUSE':
-                    return container.pause()
-                case 'UNPAUSE':
-                    return container.unpause()
-                case 'RESTART':
-                    return container.restart()
-                case 'STOP':
-                    return container.stop()
-            }
-            return Promise.reject()
-        })
-        .then(c => {
-            container = c
+    let container = docker.getContainer(server.container.Id)
+    switch(body.status) {
+        case 'START':
+            let promise = container.start()
+        case 'PAUSE':
+            let promise = container.pause()
+        case 'UNPAUSE':
+            let promise = container.unpause()
+        case 'RESTART':
+            let promise = container.restart()
+        case 'STOP':
+            let promise = container.stop()
+    }
+    promise
+        .then(data => {
             return container.inspect()
         })
         .then(cInfo => {

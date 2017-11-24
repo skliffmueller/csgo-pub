@@ -34,7 +34,6 @@ docker --tlsverify -H csgopub.rasterized.net:2376 \
 docker --tlsverify -H csgopub.rasterized.net:2376 \
         run -d \
         -e NODE_ENV=development \
-        -e PORT=8002 \
         -e MONGODB_CONNECTION_STRING=mongodb://csgo-mongodb:27017/service-images \
         -e NATS_CONNECTION_URI=nats://csgo-nats:4222 \
         -v /mnt/volume-nyc1-01/images:/var/images \
