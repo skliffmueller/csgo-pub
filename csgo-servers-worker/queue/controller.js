@@ -123,7 +123,7 @@ controller.changeStateContainer = (data, q, callback) => {
     let docker = new Docker(server.daemon.config)
     let container = docker.getContainer(server.container.Id)
     let p = Promise.reject()
-    switch(body.status) {
+    switch(state) {
         case 'START':
             p = container.start()
         case 'PAUSE':
@@ -135,8 +135,7 @@ controller.changeStateContainer = (data, q, callback) => {
         case 'STOP':
             p = container.stop()
     }
-    p
-        .then(data => {
+    p.then(data => {
             return container.inspect()
         })
         .then(cInfo => {
