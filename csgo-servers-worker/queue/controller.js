@@ -83,7 +83,6 @@ controller.changeStateContainer = (data, q, callback) => {
     let actionId = lastActionId++;
     let server = data.server
     let state = data.state
-    let container
     let info
     
     let states = {
