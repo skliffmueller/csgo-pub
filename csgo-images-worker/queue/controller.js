@@ -153,64 +153,17 @@ controller.createContainer = (data, q, callback) => {
         return callback('Must only contain one image');
     }
     orgImage = newImage.imageList[0]
-    Images.update({
-            _id:{
-                $in:[
-                    newImage._id,
-                    orgImage._id
-                ]
-            }
-        },{
-            $set:{
-                status:'MOUNTED'
-            }
-        },{
-            multi:true
-        })
-        .then((data) => {
-            // socket announce 'image', '_id', {status:'MOUNTED'}
-            let imageBody = JSON.stringify({
-                _id:[
-                    newImage._id,
-                    orgImage._id
-                ],
-                status:'MOUNTED'
-            })
-            nats.publish('socket::images', imageBody)
-            // socket announce 'notification',
-            let notBody = JSON.stringify({
-                id: actionId, // Some generated
-                state:'loading', // loading, warning, error, success
-                message:`Image '${newImage.name}' is being created`
-            })
-            nats.publish('socket::notifications', notBody)
 
-            return imgfs.createContainerImage(orgImage.imagePath, newImage.imagePath)
-        })
+    // socket announce 'notification',
+    let notBody = JSON.stringify({
+        id: actionId, // Some generated
+        state:'loading', // loading, warning, error, success
+        message:`Image '${newImage.name}' is being created`
+    })
+    nats.publish('socket::notifications', notBody)
+
+    imgfs.createContainerImage(orgImage.imagePath, newImage.imagePath)
         .then((stdout, stderr) => {
-            return Images.update({
-                _id:[
-                    newImage._id,
-                    orgImage._id
-                ]
-            },{
-                $set:{
-                    status:'IDLE'
-                }
-            },{
-                multi:true
-            })
-        })
-        .then((data) => {
-            // socket announce 'image', '_id', {status:'MOUNTED'}
-            let imageBody = JSON.stringify({
-                _id:[
-                    newImage._id,
-                    orgImage._id
-                ],
-                status:'IDLE'
-            })
-            nats.publish('socket::images', imageBody)
             // socket announce 'notification',
             let notBody = JSON.stringify({
                 id: actionId, // Some generated
