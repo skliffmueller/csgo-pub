@@ -185,9 +185,6 @@ controller.createContainer = (data, q, callback) => {
             })
             nats.publish('socket::notifications', notBody)
 
-            return imgfs.createEmptyImage(newImage.imagePath, newImage.imageSize)
-        })
-        .then((stdout, stderr) => {
             return imgfs.createContainerImage(orgImage.imagePath, newImage.imagePath)
         })
         .then((stdout, stderr) => {
