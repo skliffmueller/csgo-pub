@@ -26,4 +26,11 @@ RUN ln -s /usr/games/steamcmd $HOME/steamcmd
 WORKDIR $HOME
 VOLUME $HOME/server
 
-ENTRYPOINT ["/bin/sh"]
+EXPOSE 27015
+EXPOSE 27015/udp
+EXPOSE 27016
+EXPOSE 27016/udp
+EXPOSE 27017
+EXPOSE 27017/udp
+
+ENTRYPOINT ["/bin/sh", "-c"]
